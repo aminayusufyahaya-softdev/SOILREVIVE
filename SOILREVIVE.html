@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOILREVIVE - Digital Soil Health Platform</title>
+    <link rel="stylesheet" href="SOILREVIVE.CSS">
+    <!-- Google Fonts for clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Side: Branding & Info -->
+        <div class="brand-section">
+            <div class="logo">
+                <span class="leaf-icon">🌱</span>
+                <h1>SOILREVIVE</h1>
+            </div>
+            <p class="tagline">Transforming Soil Health into Visible Assets</p>
+            <div class="features">
+                <div class="feature-item">
+                    <span class="icon">📊</span>
+                    <span>Instant Diagnostics</span>
+                </div>
+                <div class="feature-item">
+                    <span class="icon">🛰️</span>
+                    <span>AI-Powered Analytics</span>
+                </div>
+                <div class="feature-item">
+                    <span class="icon">🛒</span>
+                    <span>Verified Marketplace</span>
+                </div>
+            </div>
+            <div class="trust-badges">
+                <p>Trusted Partners:</p>
+                <div class="badges">
+                    <span class="badge">IITA</span>
+                    <span class="badge">NAQS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="login-section">
+            <div class="offline-indicator" id="offlineIndicator">
+                <span>⚠️ Offline Mode</span>
+                <small>Use USSD *XXX# or sync when online</small>
+            </div>
+
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Select your farmer type to continue</p>
+
+            <!-- User Type Toggle -->
+            <div class="user-type-toggle">
+                <button class="toggle-btn active" data-type="local" onclick="switchUserType('local')">
+                    <span class="toggle-icon">👨‍🌾</span>
+                    Local Farmer
+                </button>
+                <button class="toggle-btn" data-type="modern" onclick="switchUserType('modern')">
+                    <span class="toggle-icon">🚜</span>
+                    Modern Farmer
+                </button>
+            </div>
+
+            <!-- Local Farmer Form -->
+            <form id="localForm" class="login-form active-form">
+                <div class="input-group">
+                    <label for="localPhone">Phone Number</label>
+                    <input type="tel" id="localPhone" placeholder="e.g., 08012345678" required>
+                </div>
+                
+                <div class="language-selector">
+                    <label for="language">Language / Harshe / Edé</label>
+                    <select id="language">
+                        <option value="en">English</option>
+                        <option value="ha">Hausa</option>
+                        <option value="yo">Yoruba</option>
+                        <option value="ig">Igbo</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <a href="local.html">Get OPT via SMS</a>
+                    Get OTP via SMS
+                    <span class="voice-icon">🎤</span>
+                </button>
+
+                <div class="ussd-fallback">
+                    <p>No smartphone? Dial <strong>*XXX#</strong> for USSD access</p>
+                </div>
+            </form>
+
+            <!-- Modern Farmer Form -->
+            <form id="modernForm" class="login-form">
+                <div class="input-group">
+                    <label for="modernEmail">Email Address</label>
+                    <input type="email" id="modernEmail" placeholder="manager@farm.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="modernPassword">Password</label>
+                    <input type="password" id="modernPassword" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary"><a href="index.html">Login to Dashboard</a>login to Dashboard</button>
+            </form>
+
+            <div class="signup-link">
+                <p>New to SOILREVIVE? <a href="registration.html">Register here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="SOILREVIVE.js"></script>
+</body>
+</html>

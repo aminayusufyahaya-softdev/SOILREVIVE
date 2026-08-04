@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOILREVIVE - Local Farmer Dashboard</title>
+    <link rel="stylesheet" href="style.css"> <!-- Reusing main styles -->
+    <style>
+        /* Specific Styles for Local Dashboard */
+        .local-header { background: #2d5016; color: white; padding: 20px; border-radius: 0 0 20px 20px; }
+        .health-score-card { background: white; padding: 20px; border-radius: 15px; text-align: center; margin: 20px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .score-gauge { width: 150px; height: 150px; border-radius: 50%; border: 10px solid #e0e0e0; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #f59e0b; border-top-color: #f59e0b; border-right-color: #f59e0b; }
+        .voice-btn { background: #4a7c2e; color: white; border: none; padding: 10px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; margin: 10px auto; cursor: pointer; }
+        .agent-card { background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .market-item { border: 1px solid #eee; padding: 15px; border-radius: 10px; margin-bottom: 10px; }
+        .btn-buy { background: #2d5016; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; }
+    </style>
+</head>
+<body style="background: #f8fafc;">
+
+    <div class="local-header">
+        <h2>Welcome, Chinedu! 👋</h2>
+        <p>Your Digital Soil Passport is active.</p>
+    </div>
+
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        
+        <!-- Soil Health Score -->
+        <div class="health-score-card">
+            <h3>Cassava Plot Health</h3>
+            <div class="score-gauge">72%</div>
+            <p style="color: #666; margin-top: 10px;">Status: <strong>Fair</strong> (Needs Nitrogen)</p>
+            <button class="voice-btn" onclick="playVoiceNote()">
+                <span>🔊</span> Listen to Advice (Igbo)
+            </button>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="health-score-card" style="text-align: left;">
+            <h3>📝 Recommended Actions</h3>
+            <ul style="padding-left: 20px; line-height: 1.8;">
+                <li>Apply <strong>NPK 15-15-15</strong> (2 bags/hectare).</li>
+                <li>Add organic manure to improve moisture.</li>
+                <li>Wait 3 days before planting due to low moisture.</li>
+            </ul>
+        </div>
+
+        <!-- Find an Agent -->
+        <h3>👨‍🌾 Nearby Soil Health Champions</h3>
+        <div class="agent-card">
+            <div>
+                <strong>Mama Ngozi Agro-Dealer</strong><br>
+                <small>0.5km away • Has Smart Probe</small>
+            </div>
+            <button style="background: #2d5016; color: white; border: none; padding: 5px 10px; border-radius: 5px;">Call</button>
+        </div>
+
+        <!-- Marketplace -->
+        <h3>🛒 Buy Recommended Inputs</h3>
+        <div class="market-item">
+            <h4>NPK 15-15-15 (50kg)</h4>
+            <p style="color: #2d5016; font-weight: bold;">₦12,500 <span style="font-size: 0.8rem; color: #666; text-decoration: line-through;">₦15,000</span></p>
+            <small>✅ Verified by IITA • Subsidized Price</small>
+            <br>
+            <a href="#" class="btn-buy">Buy Now</a>
+        </div>
+
+    </div>
+
+    <script src="dashboard.js">
+        function playVoiceNote() {
+            alert("🔊 Playing voice note in Igbo: 'Ndo Chinedu, ala gi choro nitrogen...');");
+        }
+    </script>
+</body>
+</html>

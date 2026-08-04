@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOILREVIVE - Join the Platform</title>
+    <link rel="stylesheet" href="registration.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Side: Value Proposition -->
+        <div class="info-section">
+            <div class="logo">
+                <span class="leaf-icon">🌱</span>
+                <h1>SOILREVIVE</h1>
+            </div>
+            <h2>Start Your Soil Health Journey</h2>
+            <p>Join thousands of Nigerian farmers transforming their land into visible assets.</p>
+            
+            <div class="benefits-list">
+                <div class="benefit">
+                    <span class="check">✓</span>
+                    <span>Free Digital Soil Passport</span>
+                </div>
+                <div class="benefit">
+                    <span class="check">✓</span>
+                    <span>AI-Powered Fertilizer Advice</span>
+                </div>
+                <div class="benefit">
+                    <span class="check">✓</span>
+                    <span>Access to Verified Marketplace</span>
+                </div>
+                <div class="benefit">
+                    <span class="check">✓</span>
+                    <span>IITA & NAQS Validated Science</span>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <p>"Since using SOILREVIVE, I've saved 20% on fertilizer costs while increasing my maize yield."</p>
+                <small>- Amina, Commercial Farm Manager</small>
+            </div>
+        </div>
+
+        <!-- Right Side: Registration Form -->
+        <div class="form-section">
+            <div class="form-header">
+                <h2>Create Account</h2>
+                <p>Already have an account? <a href="index.html">Login here</a></p>
+            </div>
+
+            <!-- User Type Selection -->
+            <div class="user-type-selector">
+                <label class="type-card" onclick="selectType('local')">
+                    <input type="radio" name="userType" value="local" checked>
+                    <div class="card-content">
+                        <span class="icon">👨‍🌾</span>
+                        <h3>Local Farmer</h3>
+                        <p>Smallholder, Cooperative Member</p>
+                    </div>
+                </label>
+                <label class="type-card" onclick="selectType('modern')">
+                    <input type="radio" name="userType" value="modern">
+                    <div class="card-content">
+                        <span class="icon">🚜</span>
+                        <h3>Modern Farmer</h3>
+                        <p>Commercial, Agribusiness</p>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Common Fields -->
+            <form id="registrationForm">
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="e.g., 08012345678" required>
+                </div>
+
+                <!-- Local Farmer Specific Fields -->
+                <div id="localFields" class="dynamic-fields active">
+                    <div class="input-group">
+                        <label for="language">Preferred Language</label>
+                        <select id="language">
+                            <option value="en">English</option>
+                            <option value="ha">Hausa</option>
+                            <option value="yo">Yoruba</option>
+                            <option value="ig">Igbo</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="cooperative">Cooperative / Community Group (Optional)</label>
+                        <input type="text" id="cooperative" placeholder="e.g., Umudike Farmers Coop">
+                    </div>
+                    <div class="info-box">
+                        <span>ℹ️</span>
+                        <p>You can access soil testing via our local "Soil Health Champions" if you don't own a probe.</p>
+                    </div>
+                </div>
+
+                <!-- Modern Farmer Specific Fields -->
+                <div id="modernFields" class="dynamic-fields">
+                    <div class="input-group">
+                        <label for="farmName">Farm / Business Name</label>
+                        <input type="text" id="farmName" placeholder="e.g., Green Valley Farms Ltd">
+                    </div>
+                    <div class="input-group">
+                        <label for="farmSize">Estimated Farm Size (Hectares)</label>
+                        <input type="number" id="farmSize" placeholder="e.g., 50">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Business Email</label>
+                        <input type="email" id="email" placeholder="manager@farm.com">
+                    </div>
+                    <div class="info-box premium">
+                        <span>🚀</span>
+                        <p>Unlock API integration, NDVI heatmaps, and NAQS compliance reporting.</p>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Create Password</label>
+                    <input type="password" id="password" placeholder="Minimum 8 characters" required>
+                </div>
+
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn-register">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="registration.js"></script>
+</body>
+</html>
