@@ -72,7 +72,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
                 Instant Diagnostics
               </h3>
               <p className="text-slate-300 text-sm max-w-lg mb-6 leading-relaxed">
-                Connect low-cost Bluetooth Smart Probes to get instant N-P-K, pH, and soil moisture readings on site without laboratory waiting times.
+                Perform instant Proximal Scanning Sensing to get N-P-K, pH, and soil moisture readings on site without laboratory waiting times.
               </p>
             </div>
 
@@ -186,7 +186,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
                 Climate & Irrigation Alerts
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed mb-4">
-                Hyper-local weather warnings integrated with soil moisture probes prevent crop loss from sudden drought or flash flooding.
+                Hyper-local weather warnings integrated with proximal soil scanning sensing prevent crop loss from sudden drought or flash flooding.
               </p>
             </div>
 

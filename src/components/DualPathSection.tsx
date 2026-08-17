@@ -145,7 +145,7 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                   </div>
 
                   <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                    Empowering rural communities with zero internet barriers. Local Soil Champions conduct rapid Bluetooth diagnostic scans, broadcasting localized voice recommendations directly to farmers' mobile phones.
+                    Empowering rural communities with zero internet barriers. Local Soil Champions conduct rapid proximal scanning sensing, broadcasting localized voice recommendations directly to farmers' mobile phones.
                   </p>
 
                   <div className="space-y-4 mb-8">

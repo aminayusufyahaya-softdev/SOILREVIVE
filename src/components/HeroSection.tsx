@@ -169,7 +169,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedL
                       Live Telemetry • Enugu Cassava Field #42
                     </span>
                     <span className="text-[10px] text-slate-400">
-                      Proximal Soil Probe Bluetooth Telemetry Sync
+                      Proximal Scanning Sensing Telemetry Sync
                     </span>
                   </div>
                 </div>

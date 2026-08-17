@@ -20,13 +20,13 @@ export const HowItWorksSection: React.FC = () => {
   const steps = [
     {
       number: "01",
-      title: "Proximal Soil Sensing",
-      subtitle: "Root-Zone Probe Telemetry",
-      description: "Low-cost Bluetooth Proximal Sensors measure Nitrogen, Phosphorus, Potassium (N-P-K), pH level, and Moisture in real-time right at the root zone (0-30cm).",
+      title: "Proximal Scanning Sensing",
+      subtitle: "Instant Soil Scan",
+      description: "Optical and electrochemical scanning sensors measure Nitrogen, Phosphorus, Potassium (N-P-K), pH level, and Moisture in real-time right at the root zone.",
       icon: Activity,
       color: "from-emerald-500 to-teal-600",
       accentBg: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-      badge: "Root-Zone Soil Probes",
+      badge: "Instant Soil Scanning",
       metrics: [
         { label: "N-P-K Detection", value: "±2.5 mg/kg precision" },
         { label: "pH Range", value: "3.5 - 9.0 pH" }
@@ -74,14 +74,14 @@ export const HowItWorksSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-soil-primary">
             <Layers className="w-3.5 h-3.5" />
-            <span>Proximal Sensing Precision Stack</span>
+            <span>Proximal Scanning Sensing Precision Stack</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-slate-900">
-            From Proximal Field Sensor to AI in <br className="hidden sm:block" />
+            From Proximal Soil Scan to AI in <br className="hidden sm:block" />
             <span className="text-soil-primary">3 Precision Steps</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-600">
-            Powered exclusively by Proximal Soil Sensing to inspect real-time soil content with 99.8% field accuracy.
+            Powered exclusively by Proximal Scanning Sensing to inspect real-time soil content with 99.8% field accuracy.
           </p>
         </div>
 
@@ -151,13 +151,13 @@ export const HowItWorksSection: React.FC = () => {
             <div className="space-y-3 text-center md:text-left">
               <div className="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-400">
                 <Activity className="w-4 h-4" />
-                <span>Interactive Hardware Demo</span>
+                <span>Interactive Soil Scan Demo</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold font-display">
-                Test a Live Bluetooth Soil Scan Simulation
+                Test a Live Soil Scanning Sensing Simulation
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-                Experience how our Bluetooth Smart Probe captures N-P-K readings and feeds them to the prescriptive AI engine in under 3 seconds.
+                Experience how instant Proximal Scanning Sensing captures N-P-K readings and feeds them to the prescriptive AI engine in under 3 seconds.
               </p>
             </div>
 
@@ -186,7 +186,7 @@ export const HowItWorksSection: React.FC = () => {
               >
                 {isSimulatingScan && (
                   <SoilPulseLoader
-                    label="Bluetooth Smart Probe Scanning Soil Root Zone..."
+                    label="Proximal Scanning Sensor Analyzing Soil Root Zone..."
                     sublabel="Measuring Soil Nitrates, Phosphates, Potassium & Moisture Index"
                   />
                 )}

@@ -76,7 +76,7 @@ export const UserJourneysSection: React.FC<UserJourneysSectionProps> = ({ onOpen
                   <div>
                     <h4 className="text-xs font-bold text-white uppercase tracking-wider">Rapid Community Test</h4>
                     <p className="text-xs text-slate-300 mt-1">
-                      Chinedu tests his cassava plot via a local SOILREVIVE Community Champion using a Bluetooth ground probe.
+                      Chinedu tests his cassava plot via a local SOILREVIVE Community Champion using proximal soil scanning sensing.
                     </p>
                   </div>
                 </div>
