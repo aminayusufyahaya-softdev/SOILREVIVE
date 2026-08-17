@@ -170,9 +170,9 @@ export const UserJourneysSection: React.FC<UserJourneysSectionProps> = ({ onOpen
                     1
                   </span>
                   <div>
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Satellite Telemetry Scan</h4>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Proximal Sensing Telemetry Scan</h4>
                     <p className="text-xs text-slate-300 mt-1">
-                      Amina views a high-resolution Potassium deficiency heatmap of her 45-hectare plot on her tablet via Sentinel-2 satellite data.
+                      Amina views a high-precision root-zone Potassium deficiency telemetry map of her 45-hectare plot on her tablet via Proximal Soil Sensors.
                     </p>
                   </div>
                 </div>

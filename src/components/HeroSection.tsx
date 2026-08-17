@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Tractor, ArrowRight, ShieldCheck, Satellite, Cpu, Sparkles, Activity } from 'lucide-react';
+import { Users, Tractor, ArrowRight, ShieldCheck, Radio, Cpu, Sparkles, Activity } from 'lucide-react';
 
 import { AI_VOICE_SAMPLES, speakAiText } from '../data/languages';
 
@@ -22,10 +22,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedL
     <section className="relative min-h-[92vh] pt-28 pb-16 flex items-center justify-center overflow-hidden bg-slate-950 text-white">
       {/* Background Hero Visual with Data Grid Animation */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Unsplash High Quality Image of African Farmer with Smartphone in Farm */}
+        {/* Unsplash High Quality Image of African Farmer with Mobile Soil Probe */}
         <img
           src="https://images.unsplash.com/photo-1592417817098-8f3d6eb19655?q=80&w=2000&auto=format&fit=crop"
-          alt="Nigerian farmer examining crops with mobile device"
+          alt="Nigerian farmer testing soil content with proximal sensing probe"
           className="w-full h-full object-cover object-center opacity-35 scale-105 transform filter contrast-110 brightness-90"
         />
 
@@ -65,7 +65,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedL
               <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
               <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-xs font-semibold tracking-wide text-emerald-200">
-                Nigeria's #1 AI & Satellite Soil Platform
+                Nigeria's #1 AI & Proximal Soil Sensing Platform
               </span>
             </motion.div>
 
@@ -76,9 +76,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedL
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display leading-[1.1] tracking-tight text-white"
             >
-              Transform Soil Health into{' '}
+              Inspect Soil Content via{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400">
-                Visible Assets.
+                Proximal Sensing.
               </span>
             </motion.h1>
 
@@ -89,7 +89,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedL
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-slate-300 max-w-2xl font-normal leading-relaxed"
             >
-              AI-powered diagnostics, precision analytics, and verified marketplaces for every Nigerian farmer—from smallholder plots to 50-hectare commercial farms.
+              AI-powered proximal soil sensing, root-zone telemetry, and verified input marketplaces for every Nigerian farmer—from smallholder plots to 50-hectare commercial farms.
             </motion.p>
 
             {/* Action Buttons */}
@@ -144,8 +144,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedL
 
                 {/* Trust Badge 3 */}
                 <div className="flex items-center space-x-2 bg-slate-900/80 px-3.5 py-2 rounded-lg border border-slate-800 hover:border-blue-500/40 transition-colors">
-                  <Satellite className="w-4 h-4 text-blue-400" />
-                  <span>Sentinel-2 Data Feed</span>
+                  <Radio className="w-4 h-4 text-blue-400" />
+                  <span>Proximal Sensing Telemetry</span>
                 </div>
               </div>
             </motion.div>
@@ -169,7 +169,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedL
                       Live Telemetry • Enugu Cassava Field #42
                     </span>
                     <span className="text-[10px] text-slate-400">
-                      Smart Probe Bluetooth + Sentinel-2 L2A Sync
+                      Proximal Soil Probe Bluetooth Telemetry Sync
                     </span>
                   </div>
                 </div>

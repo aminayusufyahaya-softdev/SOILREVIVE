@@ -62,7 +62,7 @@ export const FarmerModal: React.FC<FarmerModalProps> = ({
             <p className="text-slate-200 text-xs mt-1">
               {activeTab === 'local'
                 ? 'Voice-enabled AI soil testing, free USSD alerts & genuine input access.'
-                : 'Satellite NDVI heatmaps, tractor VRA API integrations & NAQS export certification.'}
+                : 'Proximal soil sensing telemetry, tractor VRA API integrations & NAQS export certification.'}
             </p>
 
             {/* Switch Tabs */}

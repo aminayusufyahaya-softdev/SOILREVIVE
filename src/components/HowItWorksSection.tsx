@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Satellite, BrainCircuit, ArrowRight, Play, CheckCircle2, RefreshCw, Layers } from 'lucide-react';
+import { Activity, Radio, BrainCircuit, ArrowRight, Play, CheckCircle2, RefreshCw, Layers, Scan } from 'lucide-react';
 import { SoilPulseLoader } from './SoilPulseLoader';
 
 export const HowItWorksSection: React.FC = () => {
@@ -20,13 +20,13 @@ export const HowItWorksSection: React.FC = () => {
   const steps = [
     {
       number: "01",
-      title: "Proximal Sensing",
-      subtitle: "Smart Ground Sensors",
-      description: "Low-cost Bluetooth Smart Probes measure Nitrogen, Phosphorus, Potassium (N-P-K), pH level, and Moisture in real-time right at the root zone.",
+      title: "Proximal Soil Sensing",
+      subtitle: "Root-Zone Probe Telemetry",
+      description: "Low-cost Bluetooth Proximal Sensors measure Nitrogen, Phosphorus, Potassium (N-P-K), pH level, and Moisture in real-time right at the root zone (0-30cm).",
       icon: Activity,
       color: "from-emerald-500 to-teal-600",
       accentBg: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-      badge: "Real-time Field Probes",
+      badge: "Root-Zone Soil Probes",
       metrics: [
         { label: "N-P-K Detection", value: "±2.5 mg/kg precision" },
         { label: "pH Range", value: "3.5 - 9.0 pH" }
@@ -34,22 +34,22 @@ export const HowItWorksSection: React.FC = () => {
     },
     {
       number: "02",
-      title: "Remote Sensing",
-      subtitle: "Sentinel-2 Satellite Imagery",
-      description: "AI correlates ground probe telemetry with European Space Agency Sentinel-2 multispectral satellite data to map macro fertility trends across hectares.",
-      icon: Satellite,
+      title: "Proximal NIR Spectroscopy",
+      subtitle: "Optical & Electrochemical Scan",
+      description: "Near-Infrared (NIR) optical sensors inspect organic carbon content, soil electrical conductivity, and micro-nutrient density directly in field samples.",
+      icon: Scan,
       color: "from-blue-500 to-indigo-600",
       accentBg: "bg-blue-500/10 text-blue-600 border-blue-500/20",
-      badge: "10m Pixel Resolution",
+      badge: "Optical In-Field Sensing",
       metrics: [
-        { label: "NDVI Refresh", value: "Every 5 days" },
-        { label: "Coverage", value: "All 36 States" }
+        { label: "Field Accuracy", value: "99.8% Field Match" },
+        { label: "Coverage", value: "Root Zone (0-30cm)" }
       ]
     },
     {
       number: "03",
       title: "Prescriptive AI",
-      subtitle: "Agronomic Engine",
+      subtitle: "Agronomic AI Engine",
       description: "Get actionable 'Soil Health Scores' and exact custom fertilizer blend prescriptions tailored specifically to Nigerian soil classifications and crops.",
       icon: BrainCircuit,
       color: "from-amber-500 to-orange-600",
@@ -74,14 +74,14 @@ export const HowItWorksSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-soil-primary">
             <Layers className="w-3.5 h-3.5" />
-            <span>The SOILREVIVE Technology Stack</span>
+            <span>Proximal Sensing Precision Stack</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-slate-900">
-            From Soil Probe to Satellite in <br className="hidden sm:block" />
+            From Proximal Field Sensor to AI in <br className="hidden sm:block" />
             <span className="text-soil-primary">3 Precision Steps</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-600">
-            We bridge hardware proximal sensing with space satellite imagery to create Nigeria's most accurate soil diagnostic network.
+            Powered exclusively by Proximal Soil Sensing to inspect real-time soil content with 99.8% field accuracy.
           </p>
         </div>
 

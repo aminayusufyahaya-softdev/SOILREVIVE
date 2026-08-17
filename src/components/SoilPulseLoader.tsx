@@ -9,7 +9,7 @@ interface SoilPulseLoaderProps {
 
 export const SoilPulseLoader: React.FC<SoilPulseLoaderProps> = ({
   label = "Scanning Soil Composition...",
-  sublabel = "Correlating Proximal Sensors with Sentinel-2 Satellite Data"
+  sublabel = "Analyzing Root Zone via High-Precision Proximal Soil Sensing"
 }) => {
   return (
     <div className="flex flex-col items-center justify-center p-8 bg-slate-900/90 text-white rounded-2xl border border-soil-primary/40 shadow-2xl relative overflow-hidden backdrop-blur-md">

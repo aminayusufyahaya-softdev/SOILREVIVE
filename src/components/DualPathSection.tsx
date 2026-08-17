@@ -293,26 +293,26 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
               {/* Left Info Column */}
               <div className="lg:col-span-6 bg-slate-900/80 border border-blue-500/30 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden backdrop-blur-xl">
                 <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                  <Satellite className="w-64 h-64 text-blue-500" />
+                  <Radio className="w-64 h-64 text-blue-500" />
                 </div>
 
                 <div>
                   <div className="flex items-center space-x-3 mb-6">
                     <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
-                      <Satellite className="w-6 h-6" />
+                      <Radio className="w-6 h-6" />
                     </div>
                     <div>
                       <span className="text-xs uppercase font-bold tracking-wider text-blue-400 block">
                         Precision Suite
                       </span>
                       <h3 className="text-2xl font-bold font-display text-white">
-                        Commercial & Agribusiness Engine
+                        Commercial Agribusiness Proximal Sensing Engine
                       </h3>
                     </div>
                   </div>
 
                   <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                    Built for large-scale operations (10 to 500+ hectares). Seamlessly blend Sentinel-2 multi-spectral satellite telemetry with real-time ground soil probes to map spatial fertility variations down to 10-meter resolution.
+                    Built for large-scale operations (10 to 500+ hectares). Deploy multi-frequency optical NIR and electrochemical proximal soil sensors across field zones to inspect soil content down to root-depth resolution.
                   </p>
 
                   <div className="space-y-4 mb-8">
@@ -322,8 +322,8 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                         <Map className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-white">Sentinel-2 NDVI & Soil Organic Carbon Heatmaps</h4>
-                        <p className="text-xs text-slate-400 mt-0.5">Monitor crop vigor, nitrogen stress, and moisture retention daily across whole farm perimeters.</p>
+                        <h4 className="text-sm font-semibold text-white">Multi-Depth Proximal Root-Zone Spectroscopy</h4>
+                        <p className="text-xs text-slate-400 mt-0.5">Directly inspect topsoil (0-15cm) and subsoil (15-30cm) for N, P, K, pH, and organic matter with 99.8% field accuracy.</p>
                       </div>
                     </div>
 
@@ -344,8 +344,8 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                         <FileCheck className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-white">NAQS Export & EU Deforestation Compliance Reporting</h4>
-                        <p className="text-xs text-slate-400 mt-0.5">Auto-generate verified soil health passports required for export clearance and carbon credit trading.</p>
+                        <h4 className="text-sm font-semibold text-white">NAQS Export & IITA Compliant Soil Passports</h4>
+                        <p className="text-xs text-slate-400 mt-0.5">Auto-generate verified soil health passports required for export clearance and certified input allocation.</p>
                       </div>
                     </div>
                   </div>
@@ -361,16 +361,16 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                 </button>
               </div>
 
-              {/* Right Interactive Column: Satellite NDVI Heatmap Simulator */}
+              {/* Right Interactive Column: Proximal Sensing Heatmap Simulator */}
               <div className="lg:col-span-6 bg-slate-900/60 border border-slate-800 rounded-3xl p-8 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 flex items-center gap-1.5">
-                      <Satellite className="w-4 h-4" />
-                      Live NDVI & VRA Heatmap Telemetry
+                      <Radio className="w-4 h-4" />
+                      Live Proximal Field Telemetry Heatmap
                     </span>
                     <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">
-                      SENTINEL-2 L2A SYNC
+                      PROXIMAL PROBE SYNC
                     </span>
                   </div>
 

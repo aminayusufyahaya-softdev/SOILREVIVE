@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Nigeria's premier digital soil health infrastructure. Combining proximal Bluetooth field sensors with Sentinel-2 satellite AI diagnostics to eliminate agricultural yield gaps.
+              Nigeria's premier digital soil health infrastructure. Powered exclusively by Proximal Soil Sensing field probes and AI diagnostics to inspect real-time soil content and eliminate agricultural yield gaps.
             </p>
 
             {/* Language Selector Buttons */}

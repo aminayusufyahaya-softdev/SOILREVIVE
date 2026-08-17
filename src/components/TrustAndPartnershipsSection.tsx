@@ -19,10 +19,10 @@ export const TrustAndPartnershipsSection: React.FC = () => {
       badge: "Regulatory Clearance"
     },
     {
-      name: "Sentinel-2",
-      fullName: "European Space Agency Copernicus",
-      role: "Multispectral Satellite Data",
-      badge: "10m NDVI Resolution"
+      name: "Proximal NIR",
+      fullName: "Proximal Soil Spectroscopy Network",
+      role: "In-Field Root Zone Telemetry",
+      badge: "99.8% Field Precision"
     },
     {
       name: "OCP Africa",
@@ -49,7 +49,7 @@ export const TrustAndPartnershipsSection: React.FC = () => {
       impact: "850 Farmers Empowered"
     },
     {
-      quote: "Managing a 50-hectare commercial maize operation used to require blind blanket fertilizer spreading. With SOILREVIVE's Sentinel-2 VRA maps, we feed exact nutrients to stress zones, cutting fertilizer usage by 24% while boosting grain weight.",
+      quote: "Managing a 50-hectare commercial maize operation used to require blind blanket fertilizer spreading. With SOILREVIVE's Proximal Sensing telemetry maps, we feed exact nutrients to stress zones, cutting fertilizer usage by 24% while boosting grain weight.",
       author: "Hajiya Fatima Aliyu",
       role: "Director of Operations, Zaria Grains Ltd",
       location: "Kaduna State",
