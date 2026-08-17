@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sprout, Globe, Users, Tractor, Menu, X, ChevronDown, Check } from 'lucide-react';
 
+import { SUPPORTED_LANGUAGES } from '../data/languages';
+
 interface NavbarProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
   selectedLang: string;
@@ -17,12 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
-  const languages = [
-    { code: 'en', name: 'English', native: 'English' },
-    { code: 'ha', name: 'Hausa', native: 'Harshen Hausa' },
-    { code: 'yo', name: 'Yoruba', native: 'Èdè Yorùbá' },
-    { code: 'ig', name: 'Igbo', native: 'Asụsụ Igbo' }
-  ];
+  const languages = SUPPORTED_LANGUAGES;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,10 +98,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-200 py-1 z-50 overflow-hidden"
+                    className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-slate-200 py-1 z-50 overflow-hidden max-h-72 overflow-y-auto"
                   >
-                    <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100">
-                      Select Regional Voice / Text
+                    <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100 flex items-center justify-between">
+                      <span>Multilingual AI Voices</span>
+                      <span className="text-emerald-600 font-bold">13 Languages</span>
                     </div>
                     {languages.map((lang) => (
                       <button
@@ -113,11 +111,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                           onSelectLang(lang.code);
                           setLangDropdownOpen(false);
                         }}
-                        className="w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-slate-50 transition-colors"
+                        className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-emerald-50 transition-colors ${
+                          selectedLang === lang.code ? 'bg-emerald-50/80 font-bold text-soil-primary' : 'text-slate-700'
+                        }`}
                       >
-                        <div>
-                          <span className="font-semibold text-slate-800 block">{lang.name}</span>
-                          <span className="text-[10px] text-slate-400">{lang.native}</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-sm">{lang.flag}</span>
+                          <div>
+                            <span className="font-semibold text-slate-800 block leading-tight">{lang.name}</span>
+                            <span className="text-[10px] text-slate-500">{lang.native}</span>
+                          </div>
                         </div>
                         {selectedLang === lang.code && (
                           <Check className="w-4 h-4 text-soil-primary" />

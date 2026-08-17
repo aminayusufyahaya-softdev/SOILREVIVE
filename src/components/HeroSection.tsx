@@ -2,11 +2,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Tractor, ArrowRight, ShieldCheck, Satellite, Cpu, Sparkles, Activity } from 'lucide-react';
 
+import { AI_VOICE_SAMPLES, speakAiText } from '../data/languages';
+
 interface HeroSectionProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
+  selectedLang?: string;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal, selectedLang = 'en' }) => {
+  const currentVoiceSample = AI_VOICE_SAMPLES[selectedLang] || AI_VOICE_SAMPLES.en;
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  const handlePlayHeroVoice = () => {
+    setIsPlaying(true);
+    speakAiText(currentVoiceSample.text, selectedLang);
+    setTimeout(() => setIsPlaying(false), 6000);
+  };
   return (
     <section className="relative min-h-[92vh] pt-28 pb-16 flex items-center justify-center overflow-hidden bg-slate-950 text-white">
       {/* Background Hero Visual with Data Grid Animation */}
@@ -203,13 +214,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenModal }) => {
               </div>
 
               {/* Recommendation Callout */}
-              <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-xs space-y-1">
+              <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-xs space-y-1.5">
                 <div className="flex items-center justify-between text-emerald-300 font-semibold">
                   <span>💡 Prescriptive AI Recommendation:</span>
-                  <span className="text-[10px] bg-emerald-500/20 px-2 py-0.5 rounded text-emerald-200">Igbo Voice Available</span>
+                  <button
+                    onClick={handlePlayHeroVoice}
+                    className={`text-[10px] px-2 py-0.5 rounded font-bold transition-all flex items-center gap-1 ${
+                      isPlaying
+                        ? 'bg-emerald-400 text-slate-950 animate-pulse'
+                        : 'bg-emerald-500/20 text-emerald-200 border border-emerald-500/40 hover:bg-emerald-500/40'
+                    }`}
+                  >
+                    <span>🔊 {currentVoiceSample.badge}</span>
+                  </button>
                 </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
-                  "Apply NPK 15-15-15 at 220kg/ha before rain onset. Yield forecast boosted by +28%."
+                <p className="text-slate-300 text-[11px] leading-relaxed italic">
+                  "{currentVoiceSample.text}"
                 </p>
               </div>
 

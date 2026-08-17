@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Sprout, Globe, Mail, Send, CheckCircle2, Shield, Heart } from 'lucide-react';
+import { SUPPORTED_LANGUAGES } from '../data/languages';
 
 interface FooterProps {
   selectedLang: string;
@@ -26,12 +27,7 @@ export const Footer: React.FC<FooterProps> = ({
     setTimeout(() => setSubscribed(false), 5000);
   };
 
-  const languages = [
-    { code: 'en', label: 'English' },
-    { code: 'ha', label: 'Hausa' },
-    { code: 'yo', label: 'Yoruba' },
-    { code: 'ig', label: 'Igbo' }
-  ];
+  const languages = SUPPORTED_LANGUAGES;
 
   return (
     <footer className="bg-slate-950 text-white border-t border-slate-900 pt-16 pb-12 relative overflow-hidden">
@@ -71,13 +67,14 @@ export const Footer: React.FC<FooterProps> = ({
                   <button
                     key={lang.code}
                     onClick={() => onSelectLang(lang.code)}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center space-x-1 ${
                       selectedLang === lang.code
                         ? 'bg-emerald-500 text-slate-950 font-bold shadow-md'
                         : 'bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800'
                     }`}
                   >
-                    {lang.label}
+                    <span>{lang.flag}</span>
+                    <span>{lang.name}</span>
                   </button>
                 ))}
               </div>

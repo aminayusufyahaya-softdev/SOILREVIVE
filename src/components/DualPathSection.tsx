@@ -19,6 +19,8 @@ import {
   ArrowRight
 } from 'lucide-react';
 
+import { AI_VOICE_SAMPLES, SUPPORTED_LANGUAGES, speakAiText } from '../data/languages';
+
 interface DualPathSectionProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
   selectedLang: string;
@@ -32,35 +34,27 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [activeVoiceLang, setActiveVoiceLang] = useState<string>(selectedLang || 'ig');
 
-  const voiceSampleTexts: Record<string, { title: string; text: string; audioDesc: string }> = {
-    ig: {
-      title: "Igbo Voice Advice (Enugu Dialect)",
-      text: "“Nne na nna, ala gị chọrọ NPK 15-15-15 mgbe mmiri ozuzo gụchara. Gaa n'ụlọ ahịa SOILREVIVE Verified ga-azụta ya n'enweghị adịgboroja.”",
-      audioDesc: "Voice note for Cassava farmers in Enugu State"
-    },
-    yo: {
-      title: "Yoruba Voice Advice (Oyo Dialect)",
-      text: "“Àgbẹ̀ wa, àyẹ̀wò ìgbatí ilẹ̀ yín fi hàn pé ó ní lílo ajile NPK 20-10-10. Tọ́jú ìwé-ẹ́rí rẹ lórí SOILREVIVE láti rí ajile gidi gbà.”",
-      audioDesc: "Voice note for Maize growers in Oyo State"
-    },
-    ha: {
-      title: "Hausa Voice Advice (Kano Dialect)",
-      text: "“Manoma, kasarku tana buƙatar NPK 15-15-15 da Potash kafin shuka. Kada ku sayi taki na bogi, yi amfani da SOILREVIVE USSD *384*55#.”",
-      audioDesc: "Voice note for Grain farmers in Kano State"
-    },
-    en: {
-      title: "English Voice Advice (Standard)",
-      text: "“Farmer, your soil report indicates Potassium deficiency. Apply 150kg/ha of NPK 15-15-15 via verified cooperative agent.”",
-      audioDesc: "Universal English soil guidance note"
+  React.useEffect(() => {
+    if (selectedLang) {
+      setActiveVoiceLang(selectedLang);
     }
-  };
+  }, [selectedLang]);
+
+  const voiceSampleTexts = AI_VOICE_SAMPLES;
 
   const toggleAudio = () => {
-    setIsPlayingAudio(!isPlayingAudio);
-    if (!isPlayingAudio) {
+    if (isPlayingAudio) {
+      setIsPlayingAudio(false);
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    } else {
+      setIsPlayingAudio(true);
+      const sample = voiceSampleTexts[activeVoiceLang] || voiceSampleTexts.en;
+      speakAiText(sample.text, activeVoiceLang);
       setTimeout(() => {
         setIsPlayingAudio(false);
-      }, 5000);
+      }, 7000);
     }
   };
 
@@ -213,27 +207,23 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                     </span>
                   </div>
 
-                  {/* Language Selector Pills */}
-                  <div className="flex space-x-2 mb-6">
-                    {[
-                      { code: 'ig', label: 'Igbo (Enugu)' },
-                      { code: 'yo', label: 'Yoruba (Oyo)' },
-                      { code: 'ha', label: 'Hausa (Kano)' },
-                      { code: 'en', label: 'English' }
-                    ].map((lang) => (
+                  {/* Multilingual Language Selector Pills */}
+                  <div className="flex space-x-2 mb-6 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-800">
+                    {SUPPORTED_LANGUAGES.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => {
                           setActiveVoiceLang(lang.code);
                           setIsPlayingAudio(false);
                         }}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                        className={`whitespace-nowrap px-3 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 flex items-center space-x-1.5 ${
                           activeVoiceLang === lang.code
                             ? 'bg-emerald-500 text-slate-950 shadow-md font-bold'
                             : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                         }`}
                       >
-                        {lang.label}
+                        <span>{lang.flag}</span>
+                        <span>{lang.name}</span>
                       </button>
                     ))}
                   </div>

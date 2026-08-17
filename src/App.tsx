@@ -8,6 +8,7 @@ import { UserJourneysSection } from './components/UserJourneysSection';
 import { TrustAndPartnershipsSection } from './components/TrustAndPartnershipsSection';
 import { Footer } from './components/Footer';
 import { FarmerModal } from './components/FarmerModal';
+import { MultilingualAiChat } from './components/MultilingualAiChat';
 
 export const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,7 +36,7 @@ export const App: React.FC = () => {
       {/* Main Page Structure */}
       <main>
         {/* 1. Hero Section */}
-        <HeroSection onOpenModal={handleOpenModal} />
+        <HeroSection onOpenModal={handleOpenModal} selectedLang={selectedLang} />
 
         {/* 2. Dual-Path Value Proposition */}
         <DualPathSection
@@ -68,6 +69,12 @@ export const App: React.FC = () => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         initialType={modalType}
+      />
+
+      {/* Floating Multilingual AI Chat Widget */}
+      <MultilingualAiChat
+        selectedLang={selectedLang}
+        onSelectLang={handleSelectLang}
       />
     </div>
   );
