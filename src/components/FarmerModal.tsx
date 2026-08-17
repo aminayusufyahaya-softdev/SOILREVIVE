@@ -178,20 +178,36 @@ export const FarmerModal: React.FC<FarmerModalProps> = ({
                 </div>
 
                 {activeTab === 'enterprise' && (
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Corporate Email
-                    </label>
-                    <div className="relative">
-                      <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-                      <input
-                        type="email"
-                        required
-                        placeholder="agronomy@farmdomain.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-soil-accent/40 focus:border-soil-accent"
-                      />
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 mb-1">
+                        Corporate Email
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                        <input
+                          type="email"
+                          required
+                          placeholder="agronomy@farmdomain.com"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-soil-accent/40 focus:border-soil-accent font-medium text-slate-900"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 mb-1">
+                        Connect Modern Machinery / Digital Farm Tool
+                      </label>
+                      <select
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-soil-accent/40 bg-white font-medium text-slate-900"
+                      >
+                        <option value="John Deere Tractor ISOBUS VRA">🚜 John Deere & ISOBUS Tractor VRA API</option>
+                        <option value="DJI Agriculture Drone Imager">🛸 DJI Agriculture Multispectral Drone</option>
+                        <option value="Netafim Smart Drip Fertigation">💧 Netafim Automated Smart Drip Valves</option>
+                        <option value="Climate FieldView Farm ERP">📊 Climate FieldView & Farm Management ERP</option>
+                      </select>
                     </div>
                   </div>
                 )}
