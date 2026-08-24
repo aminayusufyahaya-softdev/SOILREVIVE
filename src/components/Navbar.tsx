@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sprout, Globe, Users, Tractor, Menu, X, ChevronDown, Check } from 'lucide-react';
+import {
+  Sprout,
+  Globe,
+  Users,
+  Tractor,
+  Menu,
+  X,
+  ChevronDown,
+  Check,
+  CloudSun,
+  Award,
+  Database,
+  WifiOff
+} from 'lucide-react';
 
 import { SUPPORTED_LANGUAGES } from '../data/languages';
 
@@ -8,12 +21,18 @@ interface NavbarProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
   selectedLang: string;
   onSelectLang: (lang: string) => void;
+  onOpenClimateAlert?: () => void;
+  onOpenPassport?: () => void;
+  onOpenOfflineSuite?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenModal,
   selectedLang,
-  onSelectLang
+  onSelectLang,
+  onOpenClimateAlert,
+  onOpenPassport,
+  onOpenOfflineSuite
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -42,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
           ? 'bg-slate-900/95 backdrop-blur-md shadow-2xl py-3 border-b border-slate-800'
-          : 'bg-white/95 backdrop-blur-md shadow-md py-4 border-b border-slate-200'
+          : 'bg-white/95 backdrop-blur-md shadow-md py-3.5 border-b border-slate-200'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden xl:flex items-center space-x-7">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -88,8 +107,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </nav>
 
+          {/* Direct Interactive Modules Shortcuts */}
+          <div className="hidden lg:flex items-center space-x-2">
+            <button
+              onClick={onOpenPassport}
+              className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all border ${
+                scrolled
+                  ? 'bg-blue-950/80 border-blue-500/40 text-blue-300 hover:bg-blue-900'
+                  : 'bg-blue-50 border-blue-300 text-blue-700 hover:bg-blue-100'
+              }`}
+              title="Open Digital Soil Passport Suite"
+            >
+              <Award className="w-3.5 h-3.5 text-blue-400" />
+              <span>Soil Passport</span>
+            </button>
+
+            <button
+              onClick={onOpenClimateAlert}
+              className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all border ${
+                scrolled
+                  ? 'bg-teal-950/80 border-teal-500/40 text-teal-300 hover:bg-teal-900'
+                  : 'bg-teal-50 border-teal-300 text-teal-700 hover:bg-teal-100'
+              }`}
+              title="Open Climate & Irrigation Alerts"
+            >
+              <CloudSun className="w-3.5 h-3.5 text-teal-400" />
+              <span>Climate Alerts</span>
+            </button>
+          </div>
+
           {/* Right Actions */}
-          <div className="hidden md:flex items-center space-x-3">
+          <div className="hidden md:flex items-center space-x-2.5">
             {/* Language Selector Dropdown */}
             <div className="relative">
               <button
@@ -161,7 +209,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* CTAs */}
             <button
               onClick={() => onOpenModal('local')}
-              className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl transition-all text-xs font-bold shadow-sm ${
+              className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-sm ${
                 scrolled
                   ? 'bg-emerald-950/90 border border-emerald-500/50 text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 hover:border-emerald-500'
                   : 'bg-emerald-50 border border-emerald-600/40 text-emerald-800 hover:bg-emerald-600 hover:text-white'
@@ -173,7 +221,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenModal('enterprise')}
-              className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl transition-all text-xs font-bold shadow-md ${
+              className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-md ${
                 scrolled
                   ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/25'
                   : 'bg-soil-primary hover:bg-emerald-800 text-white shadow-soil-primary/20'
@@ -241,7 +289,32 @@ export const Navbar: React.FC<NavbarProps> = ({
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            {/* Mobile Direct Feature Buttons */}
+            <div className="grid grid-cols-2 gap-2 pt-2">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onOpenPassport) onOpenPassport();
+                }}
+                className="flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl font-bold text-xs bg-blue-950/80 border border-blue-500/40 text-blue-300"
+              >
+                <Award className="w-4 h-4 text-blue-400" />
+                <span>Soil Passport</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onOpenClimateAlert) onOpenClimateAlert();
+                }}
+                className="flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl font-bold text-xs bg-teal-950/80 border border-teal-500/40 text-teal-300"
+              >
+                <CloudSun className="w-4 h-4 text-teal-400" />
+                <span>Climate Alerts</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 pt-1">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
@@ -254,7 +327,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 <Users className="w-4 h-4" />
-                <span>Join Local Farmer</span>
+                <span>Local Farmer</span>
               </button>
               <button
                 onClick={() => {

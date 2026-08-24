@@ -11,14 +11,23 @@ import {
   Sparkles,
   CheckCircle,
   TrendingUp,
-  ShieldAlert
+  ShieldAlert,
+  ChevronRight
 } from 'lucide-react';
 
 interface FeatureGridBentoProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
+  onOpenClimateAlert?: () => void;
+  onOpenPassport?: () => void;
+  onOpenOfflineSuite?: () => void;
 }
 
-export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal }) => {
+export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
+  onOpenModal,
+  onOpenClimateAlert,
+  onOpenPassport,
+  onOpenOfflineSuite
+}) => {
   return (
     <section id="features" className="py-24 bg-slate-950 text-white relative overflow-hidden">
       
@@ -40,7 +49,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
             </span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            Six interconnected modules engineered to transform raw soil data into guaranteed yields, credit access, and regulatory compliance.
+            Six interconnected interactive modules engineered to transform raw soil data into guaranteed yields, credit access, and regulatory compliance.
           </p>
         </div>
 
@@ -52,7 +61,8 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="md:col-span-8 bg-gradient-to-br from-slate-900/90 via-slate-900 to-slate-950 border border-slate-800 hover:border-emerald-500/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden"
+            onClick={() => onOpenPassport ? onOpenPassport() : onOpenModal('local')}
+            className="md:col-span-8 bg-gradient-to-br from-slate-900/90 via-slate-900 to-slate-950 border border-slate-800 hover:border-emerald-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
           >
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
               <Activity className="w-48 h-48 text-emerald-400" />
@@ -63,16 +73,17 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
                 <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
                   <Activity className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
-                  PROXIMAL SENSING
+                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold flex items-center gap-1">
+                  <span>PROXIMAL SENSING</span>
+                  <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold font-display text-white mb-2">
-                Instant Diagnostics
+              <h3 className="text-xl sm:text-2xl font-bold font-display text-white mb-2 group-hover:text-emerald-300 transition-colors">
+                Instant Diagnostics Telemetry
               </h3>
-              <p className="text-slate-300 text-sm max-w-lg mb-6 leading-relaxed">
-                Perform instant Proximal Scanning Sensing to get N-P-K, pH, and soil moisture readings on site without laboratory waiting times.
+              <p className="text-slate-300 text-xs sm:text-sm max-w-lg mb-6 leading-relaxed">
+                Perform instant Proximal Scanning Sensing to get N-P-K, pH, and soil moisture readings on site without laboratory waiting times. Click to launch full diagnostics suite.
               </p>
             </div>
 
@@ -103,23 +114,25 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden"
+            onClick={() => onOpenPassport && onOpenPassport()}
+            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center">
                   <Award className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold">
-                  CREDIT SCORING
+                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold flex items-center gap-1">
+                  <span>CREDIT SCORING</span>
+                  <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold font-display text-white mb-2">
+              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-blue-300 transition-colors">
                 Digital Soil Passport
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed mb-4">
-                Build an immutable historical record of land fertility to secure agricultural loans, land lease valuation, and insurance cover.
+                Build an immutable historical record of land fertility to secure agricultural bank loans, land valuation, and insurance cover.
               </p>
             </div>
 
@@ -128,7 +141,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
                 <TrendingUp className="w-4 h-4 text-emerald-400" />
                 <span className="text-slate-300 font-medium">Bank Credit Rating</span>
               </div>
-              <span className="text-emerald-400 font-bold text-xs font-mono">AAA Rated</span>
+              <span className="text-emerald-400 font-bold text-xs font-mono">AAA+ Verified</span>
             </div>
           </motion.div>
 
@@ -138,7 +151,8 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-amber-500/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden"
+            onClick={() => onOpenModal('local')}
+            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -150,7 +164,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold font-display text-white mb-2">
+              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-amber-300 transition-colors">
                 Verified Input Marketplace
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed mb-4">
@@ -170,19 +184,21 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-teal-500/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden"
+            onClick={() => onOpenClimateAlert && onOpenClimateAlert()}
+            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-teal-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-2xl bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center">
                   <CloudSun className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20 font-bold">
-                  HYPER-LOCAL
+                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20 font-bold flex items-center gap-1">
+                  <span>HYPER-LOCAL</span>
+                  <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold font-display text-white mb-2">
+              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-teal-300 transition-colors">
                 Climate & Irrigation Alerts
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed mb-4">
@@ -191,8 +207,8 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
             </div>
 
             <div className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-300">Rainfall Forecast:</span>
-              <span className="text-teal-400 font-bold font-mono">Moderate Rain (+48h)</span>
+              <span className="text-slate-300">NIMET Radar:</span>
+              <span className="text-teal-400 font-bold font-mono">Heavy Rain Alert (+36h)</span>
             </div>
           </motion.div>
 
@@ -202,28 +218,30 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden"
+            onClick={() => onOpenOfflineSuite ? onOpenOfflineSuite() : onOpenModal('local')}
+            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
                   <WifiOff className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-bold">
-                  USSD & OFFLINE
+                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-bold flex items-center gap-1">
+                  <span>USSD & OFFLINE</span>
+                  <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold font-display text-white mb-2">
+              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-purple-300 transition-colors">
                 Offline-First Architecture
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed mb-4">
-                Full functionality without active 4G data. Data automatically syncs seamlessly once agent returns to network range.
+                Full functionality without active 4G data via USSD (*384*764#) and IndexedDB edge sync for rural and commercial operations.
               </p>
             </div>
 
             <div className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-300">Sync Status:</span>
+              <span className="text-slate-300">Dual Sync Status:</span>
               <span className="text-purple-400 font-bold font-mono">100% Offline Ready</span>
             </div>
           </motion.div>
@@ -233,10 +251,10 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({ onOpenModal 
         {/* CTA Bottom Banner */}
         <div className="mt-16 text-center">
           <button
-            onClick={() => onOpenModal('local')}
+            onClick={() => onOpenPassport ? onOpenPassport() : onOpenModal('local')}
             className="inline-flex items-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-soil-primary to-emerald-700 hover:from-soil-primaryHover hover:to-emerald-800 text-white font-semibold text-sm shadow-xl transition-all hover:scale-105"
           >
-            <span>Explore All Capabilities for Your Farm</span>
+            <span>Explore Digital Soil Passport & Precision Suite</span>
             <ArrowUpRight className="w-4 h-4" />
           </button>
         </div>

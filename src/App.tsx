@@ -9,11 +9,18 @@ import { TrustAndPartnershipsSection } from './components/TrustAndPartnershipsSe
 import { Footer } from './components/Footer';
 import { FarmerModal } from './components/FarmerModal';
 import { MultilingualAiChat } from './components/MultilingualAiChat';
+import { ClimateIrrigationAlert } from './components/ClimateIrrigationAlert';
+import { OfflineArchitectureBar } from './components/OfflineArchitectureBar';
+import { DigitalSoilPassportModal } from './components/DigitalSoilPassportModal';
 
 export const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'local' | 'enterprise'>('local');
   const [selectedLang, setSelectedLang] = useState<string>('ig');
+
+  // Active module states
+  const [climateModalOpen, setClimateModalOpen] = useState(false);
+  const [passportModalOpen, setPassportModalOpen] = useState(false);
 
   const handleOpenModal = (type: 'local' | 'enterprise') => {
     setModalType(type);
@@ -25,18 +32,25 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans text-slate-900 selection:bg-soil-primary selection:text-white">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-900 selection:bg-soil-primary selection:text-white relative">
       {/* Top Navbar */}
       <Navbar
         onOpenModal={handleOpenModal}
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}
+        onOpenClimateAlert={() => setClimateModalOpen(true)}
+        onOpenPassport={() => setPassportModalOpen(true)}
       />
 
       {/* Main Page Structure */}
       <main>
         {/* 1. Hero Section */}
-        <HeroSection onOpenModal={handleOpenModal} selectedLang={selectedLang} />
+        <HeroSection
+          onOpenModal={handleOpenModal}
+          selectedLang={selectedLang}
+          onOpenPassport={() => setPassportModalOpen(true)}
+          onOpenClimateAlert={() => setClimateModalOpen(true)}
+        />
 
         {/* 2. Dual-Path Value Proposition */}
         <DualPathSection
@@ -48,7 +62,11 @@ export const App: React.FC = () => {
         <HowItWorksSection />
 
         {/* 4. Feature Grid (Bento Box Style) */}
-        <FeatureGridBento onOpenModal={handleOpenModal} />
+        <FeatureGridBento
+          onOpenModal={handleOpenModal}
+          onOpenClimateAlert={() => setClimateModalOpen(true)}
+          onOpenPassport={() => setPassportModalOpen(true)}
+        />
 
         {/* 5. User Journeys (Storytelling Section) */}
         <UserJourneysSection onOpenModal={handleOpenModal} />
@@ -62,6 +80,25 @@ export const App: React.FC = () => {
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}
         onOpenModal={handleOpenModal}
+      />
+
+      {/* Active Global Offline-First Architecture Bar & USSD Simulator */}
+      <OfflineArchitectureBar
+        selectedLang={selectedLang}
+      />
+
+      {/* Active Climate & Irrigation Precision Suite Modal */}
+      <ClimateIrrigationAlert
+        isOpen={climateModalOpen}
+        onClose={() => setClimateModalOpen(false)}
+        selectedLang={selectedLang}
+      />
+
+      {/* Active Digital Soil Passport Verification Modal */}
+      <DigitalSoilPassportModal
+        isOpen={passportModalOpen}
+        onClose={() => setPassportModalOpen(false)}
+        selectedLang={selectedLang}
       />
 
       {/* Global Interactive Registration / Enterprise Demo Modal */}
