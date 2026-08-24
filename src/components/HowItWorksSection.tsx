@@ -3,18 +3,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, Radio, BrainCircuit, ArrowRight, Play, CheckCircle2, RefreshCw, Layers, Scan } from 'lucide-react';
 import { SoilPulseLoader } from './SoilPulseLoader';
 
-export const HowItWorksSection: React.FC = () => {
+interface HowItWorksProps {
+  onOpenScanner?: () => void;
+}
+
+export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) => {
   const [isSimulatingScan, setIsSimulatingScan] = useState(false);
   const [simulationComplete, setSimulationComplete] = useState(false);
 
   const startSimulation = () => {
+    if (onOpenScanner) {
+      onOpenScanner();
+      return;
+    }
     setIsSimulatingScan(true);
     setSimulationComplete(false);
 
     setTimeout(() => {
       setIsSimulatingScan(false);
       setSimulationComplete(true);
-    }, 3000);
+    }, 2000);
   };
 
   const steps = [
@@ -100,7 +108,8 @@ export const HowItWorksSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.2 }}
-                className="relative z-10 bg-white/90 backdrop-blur-md rounded-3xl p-8 border border-slate-200 shadow-xl hover:shadow-card-hover hover:border-soil-primary/40 transition-all flex flex-col justify-between group"
+                onClick={onOpenScanner}
+                className="relative z-10 bg-white/90 backdrop-blur-md rounded-3xl p-8 border border-slate-200 shadow-xl hover:shadow-card-hover hover:border-soil-primary/40 transition-all flex flex-col justify-between group cursor-pointer"
               >
                 <div>
                   {/* Top Step Pill & Icon */}
@@ -117,7 +126,7 @@ export const HowItWorksSection: React.FC = () => {
                     {step.badge}
                   </span>
 
-                  <h3 className="text-xl font-bold font-display text-slate-900 mb-1">
+                  <h3 className="text-xl font-bold font-display text-slate-900 mb-1 group-hover:text-soil-primary transition-colors">
                     {step.title}
                   </h3>
                   <p className="text-xs font-semibold text-soil-primary mb-3">
@@ -154,24 +163,20 @@ export const HowItWorksSection: React.FC = () => {
                 <span>Interactive Soil Scan Demo</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold font-display">
-                Test a Live Soil Scanning Sensing Simulation
+                Launch Live Proximal Soil Scanner & AI
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-                Experience how instant Proximal Scanning Sensing captures N-P-K readings and feeds them to the prescriptive AI engine in under 3 seconds.
+                Experience how instant Proximal Scanning Sensing captures optical N-P-K readings and feeds them to the prescriptive AI engine in under 3 seconds.
               </p>
             </div>
 
             <button
               onClick={startSimulation}
               disabled={isSimulatingScan}
-              className="flex items-center space-x-3 px-8 py-4 rounded-xl bg-gradient-to-r from-soil-primary to-emerald-600 hover:from-soil-primaryHover hover:to-emerald-700 text-white font-semibold text-sm shadow-xl hover:scale-105 active:scale-95 transition-all disabled:opacity-50 shrink-0"
+              className="flex items-center space-x-3 px-8 py-4 rounded-xl bg-gradient-to-r from-soil-primary to-emerald-600 hover:from-soil-primaryHover hover:to-emerald-700 text-white font-bold text-sm shadow-xl hover:scale-105 active:scale-95 transition-all disabled:opacity-50 shrink-0"
             >
-              {isSimulatingScan ? (
-                <RefreshCw className="w-5 h-5 animate-spin text-emerald-300" />
-              ) : (
-                <Play className="w-5 h-5 text-emerald-300 fill-current" />
-              )}
-              <span>{isSimulatingScan ? 'Scanning Soil...' : 'Run Diagnostics Simulation'}</span>
+              <Scan className="w-5 h-5 text-emerald-200 animate-pulse" />
+              <span>Launch Live Proximal Scanner</span>
             </button>
           </div>
 

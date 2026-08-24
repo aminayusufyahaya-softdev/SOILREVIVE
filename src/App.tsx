@@ -12,6 +12,7 @@ import { MultilingualAiChat } from './components/MultilingualAiChat';
 import { ClimateIrrigationAlert } from './components/ClimateIrrigationAlert';
 import { OfflineArchitectureBar } from './components/OfflineArchitectureBar';
 import { DigitalSoilPassportModal } from './components/DigitalSoilPassportModal';
+import { ProximalSensingScannerModal } from './components/ProximalSensingScannerModal';
 
 export const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,6 +22,9 @@ export const App: React.FC = () => {
   // Active module states
   const [climateModalOpen, setClimateModalOpen] = useState(false);
   const [passportModalOpen, setPassportModalOpen] = useState(false);
+  const [scannerModalOpen, setScannerModalOpen] = useState(false);
+  const [passportTargetId, setPassportTargetId] = useState<string>('NG-SOIL-2026-8849');
+  const [aiChatPrompt, setAiChatPrompt] = useState<string | null>(null);
 
   const handleOpenModal = (type: 'local' | 'enterprise') => {
     setModalType(type);
@@ -31,6 +35,15 @@ export const App: React.FC = () => {
     setSelectedLang(lang);
   };
 
+  const handleOpenPassportWithId = (id?: string) => {
+    if (id) setPassportTargetId(id);
+    setPassportModalOpen(true);
+  };
+
+  const handleOpenChatWithDiagnosis = (reportText: string) => {
+    setAiChatPrompt(reportText);
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 font-sans text-slate-900 selection:bg-soil-primary selection:text-white relative">
       {/* Top Navbar */}
@@ -39,7 +52,8 @@ export const App: React.FC = () => {
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}
         onOpenClimateAlert={() => setClimateModalOpen(true)}
-        onOpenPassport={() => setPassportModalOpen(true)}
+        onOpenPassport={() => handleOpenPassportWithId()}
+        onOpenScanner={() => setScannerModalOpen(true)}
       />
 
       {/* Main Page Structure */}
@@ -48,8 +62,9 @@ export const App: React.FC = () => {
         <HeroSection
           onOpenModal={handleOpenModal}
           selectedLang={selectedLang}
-          onOpenPassport={() => setPassportModalOpen(true)}
+          onOpenPassport={() => handleOpenPassportWithId()}
           onOpenClimateAlert={() => setClimateModalOpen(true)}
+          onOpenScanner={() => setScannerModalOpen(true)}
         />
 
         {/* 2. Dual-Path Value Proposition */}
@@ -59,13 +74,14 @@ export const App: React.FC = () => {
         />
 
         {/* 3. How It Works (The Technology Stack) */}
-        <HowItWorksSection />
+        <HowItWorksSection onOpenScanner={() => setScannerModalOpen(true)} />
 
         {/* 4. Feature Grid (Bento Box Style) */}
         <FeatureGridBento
           onOpenModal={handleOpenModal}
           onOpenClimateAlert={() => setClimateModalOpen(true)}
-          onOpenPassport={() => setPassportModalOpen(true)}
+          onOpenPassport={() => handleOpenPassportWithId()}
+          onOpenScanner={() => setScannerModalOpen(true)}
         />
 
         {/* 5. User Journeys (Storytelling Section) */}
@@ -87,6 +103,15 @@ export const App: React.FC = () => {
         selectedLang={selectedLang}
       />
 
+      {/* Active Live Proximal Sensing & AI Diagnostic Scanner Modal */}
+      <ProximalSensingScannerModal
+        isOpen={scannerModalOpen}
+        onClose={() => setScannerModalOpen(false)}
+        selectedLang={selectedLang}
+        onOpenPassport={(id) => handleOpenPassportWithId(id)}
+        onOpenChatWithReport={(report) => handleOpenChatWithDiagnosis(report)}
+      />
+
       {/* Active Climate & Irrigation Precision Suite Modal */}
       <ClimateIrrigationAlert
         isOpen={climateModalOpen}
@@ -98,6 +123,7 @@ export const App: React.FC = () => {
       <DigitalSoilPassportModal
         isOpen={passportModalOpen}
         onClose={() => setPassportModalOpen(false)}
+        initialPassportId={passportTargetId}
         selectedLang={selectedLang}
       />
 
@@ -112,6 +138,9 @@ export const App: React.FC = () => {
       <MultilingualAiChat
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}
+        onOpenScanner={() => setScannerModalOpen(true)}
+        externalPrompt={aiChatPrompt}
+        onClearExternalPrompt={() => setAiChatPrompt(null)}
       />
     </div>
   );

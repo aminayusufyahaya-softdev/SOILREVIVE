@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Tractor, ArrowRight, ShieldCheck, Radio, Cpu, Sparkles, Activity, Award, CloudSun, Database } from 'lucide-react';
+import { Users, Tractor, ArrowRight, ShieldCheck, Radio, Cpu, Sparkles, Activity, Award, CloudSun, Database, Scan } from 'lucide-react';
 
 import { AI_VOICE_SAMPLES, speakAiText } from '../data/languages';
 
@@ -10,6 +10,7 @@ interface HeroSectionProps {
   onOpenPassport?: () => void;
   onOpenClimateAlert?: () => void;
   onOpenOfflineSuite?: () => void;
+  onOpenScanner?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -17,7 +18,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   selectedLang = 'en',
   onOpenPassport,
   onOpenClimateAlert,
-  onOpenOfflineSuite
+  onOpenOfflineSuite,
+  onOpenScanner
 }) => {
   const currentVoiceSample = AI_VOICE_SAMPLES[selectedLang] || AI_VOICE_SAMPLES.en;
   const [isPlaying, setIsPlaying] = React.useState(false);
@@ -70,12 +72,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-lg"
+              onClick={onOpenScanner}
+              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-lg cursor-pointer hover:border-emerald-400 transition-colors"
             >
               <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+              <Scan className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-xs font-semibold tracking-wide text-emerald-200">
-                Nigeria's #1 AI & Proximal Soil Sensing Platform
+                Nigeria's #1 AI Proximal Soil Scanner • Tap to Scan
               </span>
             </motion.div>
 
@@ -99,7 +102,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-slate-300 max-w-2xl font-normal leading-relaxed"
             >
-              AI-powered proximal soil sensing, root-zone telemetry, and verified input marketplaces for every Nigerian farmer—from smallholder plots to 50-hectare commercial farms.
+              AI-powered proximal soil sensing, optical root-zone telemetry, and verified input marketplaces for every Nigerian farmer—from smallholder plots to 50-hectare commercial farms.
             </motion.p>
 
             {/* Action Buttons */}
@@ -109,23 +112,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
             >
-              {/* Primary CTA: Soil Passport */}
+              {/* Primary CTA: Launch Live Proximal Scanner */}
               <button
-                onClick={() => onOpenPassport ? onOpenPassport() : onOpenModal('local')}
-                className="group flex items-center justify-center space-x-3 px-6 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-semibold text-sm sm:text-base shadow-xl shadow-blue-600/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                onClick={onOpenScanner}
+                className="group flex items-center justify-center space-x-3 px-6 py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-sm sm:text-base shadow-xl shadow-emerald-600/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                <Award className="w-5 h-5 text-blue-200 group-hover:scale-110 transition-transform" />
-                <span>View Digital Soil Passport</span>
+                <Scan className="w-5 h-5 text-emerald-200 animate-pulse" />
+                <span>Launch Proximal Soil Scanner</span>
                 <ArrowRight className="w-4 h-4 text-white/80 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              {/* Secondary CTA: Climate Suite */}
+              {/* Secondary CTA: Soil Passport */}
               <button
-                onClick={() => onOpenClimateAlert ? onOpenClimateAlert() : onOpenModal('enterprise')}
-                className="group flex items-center justify-center space-x-3 px-6 py-4 rounded-xl bg-slate-900/90 border border-teal-500/40 hover:border-teal-400 text-white hover:bg-slate-800 font-semibold text-sm sm:text-base backdrop-blur-md shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+                onClick={onOpenPassport}
+                className="group flex items-center justify-center space-x-3 px-6 py-4 rounded-xl bg-slate-900/90 border border-blue-500/40 hover:border-blue-400 text-white hover:bg-slate-800 font-semibold text-sm sm:text-base backdrop-blur-md shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                <CloudSun className="w-5 h-5 text-teal-400 group-hover:scale-110 transition-transform" />
-                <span>Climate & Irrigation Alerts</span>
+                <Award className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform" />
+                <span>View Digital Soil Passport</span>
               </button>
             </motion.div>
 
@@ -142,7 +145,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-slate-300 text-xs font-semibold">
                 {/* Trust Badge 1 */}
                 <div
-                  onClick={() => onOpenPassport && onOpenPassport()}
+                  onClick={onOpenScanner}
                   className="flex items-center space-x-2 bg-slate-900/80 px-3.5 py-2 rounded-lg border border-slate-800 hover:border-emerald-500/40 transition-colors cursor-pointer"
                 >
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -151,7 +154,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
                 {/* Trust Badge 2 */}
                 <div
-                  onClick={() => onOpenPassport && onOpenPassport()}
+                  onClick={onOpenPassport}
                   className="flex items-center space-x-2 bg-slate-900/80 px-3.5 py-2 rounded-lg border border-slate-800 hover:border-amber-500/40 transition-colors cursor-pointer"
                 >
                   <Activity className="w-4 h-4 text-amber-400" />
@@ -160,7 +163,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
                 {/* Trust Badge 3 */}
                 <div
-                  onClick={() => onOpenClimateAlert && onOpenClimateAlert()}
+                  onClick={onOpenClimateAlert}
                   className="flex items-center space-x-2 bg-slate-900/80 px-3.5 py-2 rounded-lg border border-slate-800 hover:border-blue-500/40 transition-colors cursor-pointer"
                 >
                   <Radio className="w-4 h-4 text-blue-400" />
@@ -177,19 +180,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              onClick={() => onOpenPassport && onOpenPassport()}
-              className="relative rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/95 border border-slate-800 hover:border-blue-500/50 p-6 shadow-2xl backdrop-blur-xl cursor-pointer group transition-all"
+              onClick={onOpenScanner}
+              className="relative rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/95 border border-slate-800 hover:border-emerald-500/50 p-6 shadow-2xl backdrop-blur-xl cursor-pointer group transition-all"
             >
               {/* Card Header Bar */}
               <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 rounded-full bg-emerald-500 animate-ping" />
                   <div>
-                    <span className="text-xs font-bold text-slate-200 block group-hover:text-blue-300 transition-colors">
+                    <span className="text-xs font-bold text-slate-200 block group-hover:text-emerald-300 transition-colors">
                       Live Telemetry • Enugu Cassava Field #42
                     </span>
                     <span className="text-[10px] text-slate-400">
-                      Passport ID: NG-SOIL-2026-8849 (Click to View)
+                      Optical Proximal Sensing (Click to Scan & Send to AI)
                     </span>
                   </div>
                 </div>

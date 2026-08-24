@@ -12,7 +12,8 @@ import {
   CheckCircle,
   TrendingUp,
   ShieldAlert,
-  ChevronRight
+  ChevronRight,
+  Scan
 } from 'lucide-react';
 
 interface FeatureGridBentoProps {
@@ -20,13 +21,15 @@ interface FeatureGridBentoProps {
   onOpenClimateAlert?: () => void;
   onOpenPassport?: () => void;
   onOpenOfflineSuite?: () => void;
+  onOpenScanner?: () => void;
 }
 
 export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
   onOpenModal,
   onOpenClimateAlert,
   onOpenPassport,
-  onOpenOfflineSuite
+  onOpenOfflineSuite,
+  onOpenScanner
 }) => {
   return (
     <section id="features" className="py-24 bg-slate-950 text-white relative overflow-hidden">
@@ -61,7 +64,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            onClick={() => onOpenPassport ? onOpenPassport() : onOpenModal('local')}
+            onClick={() => onOpenScanner ? onOpenScanner() : onOpenModal('local')}
             className="md:col-span-8 bg-gradient-to-br from-slate-900/90 via-slate-900 to-slate-950 border border-slate-800 hover:border-emerald-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
           >
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
@@ -71,7 +74,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
-                  <Activity className="w-6 h-6" />
+                  <Scan className="w-6 h-6 animate-pulse" />
                 </div>
                 <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold flex items-center gap-1">
                   <span>PROXIMAL SENSING</span>
@@ -80,10 +83,10 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold font-display text-white mb-2 group-hover:text-emerald-300 transition-colors">
-                Instant Diagnostics Telemetry
+                Instant Diagnostics Telemetry (Tap to Scan)
               </h3>
               <p className="text-slate-300 text-xs sm:text-sm max-w-lg mb-6 leading-relaxed">
-                Perform instant Proximal Scanning Sensing to get N-P-K, pH, and soil moisture readings on site without laboratory waiting times. Click to launch full diagnostics suite.
+                Perform instant Proximal Scanning Sensing to get N-P-K, pH, and soil moisture readings on site without laboratory waiting times. Feeds directly into Agronomy AI.
               </p>
             </div>
 
@@ -251,10 +254,11 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
         {/* CTA Bottom Banner */}
         <div className="mt-16 text-center">
           <button
-            onClick={() => onOpenPassport ? onOpenPassport() : onOpenModal('local')}
-            className="inline-flex items-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-soil-primary to-emerald-700 hover:from-soil-primaryHover hover:to-emerald-800 text-white font-semibold text-sm shadow-xl transition-all hover:scale-105"
+            onClick={() => onOpenScanner ? onOpenScanner() : onOpenModal('local')}
+            className="inline-flex items-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-soil-primary to-emerald-700 hover:from-soil-primaryHover hover:to-emerald-800 text-white font-bold text-sm shadow-xl transition-all hover:scale-105"
           >
-            <span>Explore Digital Soil Passport & Precision Suite</span>
+            <Scan className="w-4 h-4 text-emerald-300" />
+            <span>Launch Live Proximal Soil Scanner</span>
             <ArrowUpRight className="w-4 h-4" />
           </button>
         </div>

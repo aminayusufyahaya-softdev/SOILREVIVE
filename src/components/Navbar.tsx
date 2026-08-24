@@ -12,7 +12,9 @@ import {
   CloudSun,
   Award,
   Database,
-  WifiOff
+  WifiOff,
+  Scan,
+  Camera
 } from 'lucide-react';
 
 import { SUPPORTED_LANGUAGES } from '../data/languages';
@@ -24,6 +26,7 @@ interface NavbarProps {
   onOpenClimateAlert?: () => void;
   onOpenPassport?: () => void;
   onOpenOfflineSuite?: () => void;
+  onOpenScanner?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -32,7 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectLang,
   onOpenClimateAlert,
   onOpenPassport,
-  onOpenOfflineSuite
+  onOpenOfflineSuite,
+  onOpenScanner
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -109,6 +113,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Direct Interactive Modules Shortcuts */}
           <div className="hidden lg:flex items-center space-x-2">
+            {/* Live Proximal Scanner Button */}
+            <button
+              onClick={onOpenScanner}
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-600/20"
+              title="Launch Live Proximal Soil Scanner"
+            >
+              <Scan className="w-3.5 h-3.5 animate-pulse" />
+              <span>Proximal Scan</span>
+            </button>
+
             <button
               onClick={onOpenPassport}
               className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all border ${
@@ -235,6 +249,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center space-x-2">
             <button
+              onClick={onOpenScanner}
+              className="p-2 rounded-lg bg-emerald-600 text-white"
+              title="Scan Soil"
+            >
+              <Scan className="w-4 h-4" />
+            </button>
+
+            <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
               className={`p-2 rounded-lg border ${
                 scrolled
@@ -290,16 +312,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             {/* Mobile Direct Feature Buttons */}
-            <div className="grid grid-cols-2 gap-2 pt-2">
+            <div className="grid grid-cols-3 gap-2 pt-2">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onOpenScanner) onOpenScanner();
+                }}
+                className="flex items-center justify-center space-x-1 py-2.5 px-2 rounded-xl font-bold text-xs bg-emerald-600 text-white shadow-md"
+              >
+                <Scan className="w-3.5 h-3.5" />
+                <span>Scan Soil</span>
+              </button>
+
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   if (onOpenPassport) onOpenPassport();
                 }}
-                className="flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl font-bold text-xs bg-blue-950/80 border border-blue-500/40 text-blue-300"
+                className="flex items-center justify-center space-x-1 py-2.5 px-2 rounded-xl font-bold text-xs bg-blue-950/80 border border-blue-500/40 text-blue-300"
               >
-                <Award className="w-4 h-4 text-blue-400" />
-                <span>Soil Passport</span>
+                <Award className="w-3.5 h-3.5 text-blue-400" />
+                <span>Passport</span>
               </button>
 
               <button
@@ -307,10 +340,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   if (onOpenClimateAlert) onOpenClimateAlert();
                 }}
-                className="flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl font-bold text-xs bg-teal-950/80 border border-teal-500/40 text-teal-300"
+                className="flex items-center justify-center space-x-1 py-2.5 px-2 rounded-xl font-bold text-xs bg-teal-950/80 border border-teal-500/40 text-teal-300"
               >
-                <CloudSun className="w-4 h-4 text-teal-400" />
-                <span>Climate Alerts</span>
+                <CloudSun className="w-3.5 h-3.5 text-teal-400" />
+                <span>Climate</span>
               </button>
             </div>
 
