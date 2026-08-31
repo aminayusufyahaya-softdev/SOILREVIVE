@@ -183,11 +183,11 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                     {/* Key Feature 1 */}
                     <div className="flex items-start space-x-3.5 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
                       <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-300 mt-0.5">
-                        <WifiOff className="w-4 h-4" />
+                        <Wifi className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white">Offline-First & USSD Supported (*384*55#)</h4>
-                        <p className="text-xs text-slate-300 mt-0.5 font-medium">Works in zero 3G/4G coverage zones. Receive recommendations via SMS or automated interactive voice calls.</p>
+                        <h4 className="text-sm font-bold text-white">Live Online Real-Time Telemetry</h4>
+                        <p className="text-xs text-slate-300 mt-0.5 font-medium">Instant cloud sync directly connects on-field sensor diagnostics with regional agronomic AI models.</p>
                       </div>
                     </div>
 
@@ -203,12 +203,15 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                     </div>
 
                     {/* Key Feature 3 */}
-                    <div className="flex items-start space-x-3.5 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-                      <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-300 mt-0.5">
+                    <div className="flex items-start space-x-3.5 p-4 rounded-xl bg-slate-950/80 border border-amber-500/40">
+                      <div className="p-2 rounded-lg bg-amber-500/20 text-amber-300 mt-0.5">
                         <ShieldCheck className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white">Counterfeit-Free Subsidized Marketplace</h4>
+                        <div className="flex items-center space-x-2">
+                          <h4 className="text-sm font-bold text-white">Counterfeit-Free Subsidized Marketplace</h4>
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold uppercase font-mono">Active</span>
+                        </div>
                         <p className="text-xs text-slate-300 mt-0.5 font-medium">Direct connection to verified fertilizer blending plants with QR verification codes eliminating fake inputs.</p>
                       </div>
                     </div>
@@ -295,7 +298,7 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
                     <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                     <span className="font-semibold">IITA Verified Advice</span>
                   </div>
-                  <span className="text-emerald-400 font-bold">100% Offline Compatible</span>
+                  <span className="text-emerald-400 font-bold">100% Live Online Synced</span>
                 </div>
               </div>
             </motion.div>

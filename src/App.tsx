@@ -10,7 +10,6 @@ import { Footer } from './components/Footer';
 import { FarmerModal } from './components/FarmerModal';
 import { MultilingualAiChat } from './components/MultilingualAiChat';
 import { ClimateIrrigationAlert } from './components/ClimateIrrigationAlert';
-import { OfflineArchitectureBar } from './components/OfflineArchitectureBar';
 import { DigitalSoilPassportModal } from './components/DigitalSoilPassportModal';
 import { ProximalSensingScannerModal } from './components/ProximalSensingScannerModal';
 
@@ -96,11 +95,6 @@ export const App: React.FC = () => {
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}
         onOpenModal={handleOpenModal}
-      />
-
-      {/* Active Global Offline-First Architecture Bar & USSD Simulator */}
-      <OfflineArchitectureBar
-        selectedLang={selectedLang}
       />
 
       {/* Active Live Proximal Sensing & AI Diagnostic Scanner Modal */}

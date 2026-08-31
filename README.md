@@ -11,7 +11,8 @@ SoilRevive is an AI-powered agronomy and digital soil health platform designed s
 * **🌾 Digital Soil Passport**: Comprehensive farm health credentials tracking pH, Nitrogen (N), Phosphorus (P), Potassium (K), Organic Carbon, and micronutrients with verifiable tamper-proof certificates.
 * **🛰️ Satellite & Proximal Sensing Diagnostics**: AI-assisted multispectral analysis, NDVI vegetation indexing, and moisture retention mapping.
 * **🗣️ Multilingual Agronomy AI**: Interactive real-time advisory supporting English, Hausa, Yoruba, and Igbo with voice and text capabilities.
-* **⚡ Offline-First Architecture**: Built-in USSD/SMS fallback, localized caching, and low-bandwidth optimizations for remote rural farming communities.
+* **🚜 Enterprise Precision Suite**: Machine-to-Machine (M2M) telemetry, ISOBUS tractor support, VRA shapefile exports, and commercial farm dashboards.
+* **🛒 Active Verified Marketplace**: Anti-counterfeit subsidized fertilizer blends with direct ordering and QR authenticity verification.
 * **🤝 Trust & Verification Hub**: Integrations and data validation aligned with standards from IITA, NAQS, and FMARD.
 * **🌦️ Climate & Irrigation Alerts**: Real-time agro-meteorological forecasting, pest alerts, and water-saving irrigation guidance.
 
@@ -83,7 +84,6 @@ SOILREVIVE/
 │   │   ├── HowItWorksSection.tsx
 │   │   ├── MultilingualAiChat.tsx
 │   │   ├── Navbar.tsx
-│   │   ├── OfflineArchitectureBar.tsx
 │   │   ├── ProximalSensingScannerModal.tsx
 │   │   ├── SoilPulseLoader.tsx
 │   │   ├── TrustAndPartnershipsSection.tsx

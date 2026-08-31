@@ -60,9 +60,9 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
       subtitle: "Agronomic AI Engine",
       description: "Get actionable 'Soil Health Scores' and exact custom fertilizer blend prescriptions tailored specifically to Nigerian soil classifications and crops.",
       icon: BrainCircuit,
-      color: "from-amber-500 to-orange-600",
-      accentBg: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-      badge: "Custom Blends",
+      color: "from-slate-950 via-slate-900 to-slate-800",
+      accentBg: "bg-slate-900 text-emerald-300 border-slate-700 shadow-sm",
+      badge: "Prescriptive AI Engine",
       metrics: [
         { label: "Yield Uplift", value: "+25% to +40%" },
         { label: "Waste Reduction", value: "-20% Input Cost" }

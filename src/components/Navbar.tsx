@@ -12,7 +12,7 @@ import {
   CloudSun,
   Award,
   Database,
-  WifiOff,
+  Wifi,
   Scan,
   Camera
 } from 'lucide-react';
@@ -25,7 +25,6 @@ interface NavbarProps {
   onSelectLang: (lang: string) => void;
   onOpenClimateAlert?: () => void;
   onOpenPassport?: () => void;
-  onOpenOfflineSuite?: () => void;
   onOpenScanner?: () => void;
 }
 
@@ -35,7 +34,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectLang,
   onOpenClimateAlert,
   onOpenPassport,
-  onOpenOfflineSuite,
   onOpenScanner
 }) => {
   const [scrolled, setScrolled] = useState(false);

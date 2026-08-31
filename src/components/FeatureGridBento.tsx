@@ -5,7 +5,7 @@ import {
   Award,
   ShoppingCart,
   CloudSun,
-  WifiOff,
+  Wifi,
   FileCheck,
   ArrowUpRight,
   Sparkles,
@@ -13,14 +13,15 @@ import {
   TrendingUp,
   ShieldAlert,
   ChevronRight,
-  Scan
+  Scan,
+  CheckCircle2,
+  Tractor
 } from 'lucide-react';
 
 interface FeatureGridBentoProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
   onOpenClimateAlert?: () => void;
   onOpenPassport?: () => void;
-  onOpenOfflineSuite?: () => void;
   onOpenScanner?: () => void;
 }
 
@@ -28,7 +29,6 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
   onOpenModal,
   onOpenClimateAlert,
   onOpenPassport,
-  onOpenOfflineSuite,
   onOpenScanner
 }) => {
   return (
@@ -52,7 +52,7 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
             </span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            Six interconnected interactive modules engineered to transform raw soil data into guaranteed yields, credit access, and regulatory compliance.
+            Interactive modules engineered to transform raw soil data into guaranteed yields, credit access, and regulatory compliance.
           </p>
         </div>
 
@@ -148,37 +148,57 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
             </div>
           </motion.div>
 
-          {/* Bento Item 3: Verified Marketplace (4 Cols) */}
+          {/* Bento Item 3: ACTIVE Verified Input Marketplace (4 Cols) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             onClick={() => onOpenModal('local')}
-            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
+            className="md:col-span-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border border-amber-500/50 hover:border-amber-400 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.02] ring-1 ring-amber-500/20"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center">
-                  <ShoppingCart className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center shadow-lg">
+                  <ShoppingCart className="w-6 h-6 animate-bounce" />
                 </div>
-                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-bold">
-                  ZERO COUNTERFEITS
+                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-black flex items-center gap-1.5 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                  <span>MARKET ACTIVE</span>
                 </span>
               </div>
 
-              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-amber-300 transition-colors">
-                Verified Input Marketplace
+              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-amber-300 transition-colors flex items-center justify-between">
+                <span>Verified Input Marketplace</span>
+                <ChevronRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed mb-4">
-                Buy genuine, subsidized fertilizers and bio-stimulants directly from certified blenders with scratch-off QR authenticity codes.
+                Direct purchasing of authentic subsidized fertilizer blends (Notore, Indorama, Golden Fertilizer) with anti-counterfeit QR serial codes.
               </p>
+
+              {/* Active Catalog Preview */}
+              <div className="space-y-1.5 mb-3">
+                <div className="flex items-center justify-between text-[11px] p-2 rounded-lg bg-slate-950 border border-slate-800">
+                  <span className="text-slate-200 font-semibold">NPK 20-10-10 (Certified)</span>
+                  <span className="text-emerald-400 font-mono font-bold">₦18,500</span>
+                </div>
+                <div className="flex items-center justify-between text-[11px] p-2 rounded-lg bg-slate-950 border border-slate-800">
+                  <span className="text-slate-200 font-semibold">Organic Bio-Stimulant (10L)</span>
+                  <span className="text-emerald-400 font-mono font-bold">₦12,000</span>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-300">Subsidized Price:</span>
-              <span className="text-amber-400 font-bold font-mono">₦18,500 / 50kg</span>
-            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenModal('local');
+              }}
+              className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-black text-xs shadow-lg flex items-center justify-center space-x-1.5 transition-all"
+            >
+              <ShoppingCart className="w-3.5 h-3.5" />
+              <span>Order Verified Inputs Now</span>
+            </button>
           </motion.div>
 
           {/* Bento Item 4: Climate Resilience (4 Cols) */}
@@ -215,37 +235,37 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
             </div>
           </motion.div>
 
-          {/* Bento Item 5: Offline-First & Regulatory (4 Cols) */}
+          {/* Bento Item 5: Real-Time Cloud Telemetry & ISOBUS Sync (4 Cols - 100% ONLINE) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            onClick={() => onOpenOfflineSuite ? onOpenOfflineSuite() : onOpenModal('local')}
-            className="md:col-span-4 bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
+            onClick={() => onOpenModal('enterprise')}
+            className="md:col-span-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border border-blue-500/40 hover:border-blue-400 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl group transition-all relative overflow-hidden cursor-pointer hover:scale-[1.01]"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
-                  <WifiOff className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center">
+                  <Wifi className="w-6 h-6 animate-pulse" />
                 </div>
-                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-bold flex items-center gap-1">
-                  <span>USSD & OFFLINE</span>
+                <span className="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 font-black flex items-center gap-1">
+                  <span>100% ONLINE SYNC</span>
                   <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>
 
-              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-purple-300 transition-colors">
-                Offline-First Architecture
+              <h3 className="text-lg sm:text-xl font-bold font-display text-white mb-2 group-hover:text-blue-300 transition-colors">
+                Real-Time Cloud Telemetry
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed mb-4">
-                Full functionality without active 4G data via USSD (*384*764#) and IndexedDB edge sync for rural and commercial operations.
+                High-speed sub-second cloud synchronization for tractor ISOBUS consoles, drone flight paths, and regional commercial farm dashboards.
               </p>
             </div>
 
             <div className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-              <span className="text-slate-300">Dual Sync Status:</span>
-              <span className="text-purple-400 font-bold font-mono">100% Offline Ready</span>
+              <span className="text-slate-300">Cloud Sync Latency:</span>
+              <span className="text-emerald-400 font-bold font-mono">0.24s (Live Cloud)</span>
             </div>
           </motion.div>
 
