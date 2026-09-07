@@ -62,31 +62,25 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'bg-slate-900/95 backdrop-blur-md shadow-2xl py-3 border-b border-slate-800'
-          : 'bg-white/95 backdrop-blur-md shadow-md py-3.5 border-b border-slate-200'
+          ? 'bg-[#06180e]/95 backdrop-blur-md shadow-2xl py-3 border-b border-[#21351e]'
+          : 'bg-[#081d11]/85 backdrop-blur-md shadow-md py-3.5 border-b border-[#1f321c]/60'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center space-x-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-soil-primary to-emerald-800 flex items-center justify-center text-white shadow-md shadow-soil-primary/20 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-800 to-[#1b2b18] border border-emerald-600/40 flex items-center justify-center text-white shadow-md shadow-emerald-950/40 group-hover:scale-105 transition-transform">
               <Sprout className="w-6 h-6 text-emerald-300" />
             </div>
             <div>
-              <span className={`text-xl font-extrabold font-display tracking-tight flex items-center gap-1 ${
-                scrolled ? 'text-white' : 'text-slate-900'
-              }`}>
-                SOIL<span className={scrolled ? 'text-emerald-400' : 'text-soil-primary'}>REVIVE</span>
-                <span className={`text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded font-bold ml-1 ${
-                  scrolled ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/30' : 'bg-emerald-100 text-soil-primary'
-                }`}>
+              <span className="text-xl font-extrabold font-display tracking-tight flex items-center gap-1 text-white">
+                SOIL<span className="text-emerald-400">REVIVE</span>
+                <span className="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded font-bold ml-1 bg-emerald-950 text-amber-300 border border-amber-600/40">
                   NG
                 </span>
               </span>
-              <p className={`text-[10px] font-medium tracking-wide leading-none hidden sm:block ${
-                scrolled ? 'text-slate-400' : 'text-slate-500'
-              }`}>
+              <p className="text-[10px] font-medium tracking-wide leading-none text-emerald-300/70 hidden sm:block">
                 Digital Soil Health Platform
               </p>
             </div>
@@ -98,11 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-semibold transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:w-full after:transition-all ${
-                  scrolled
-                    ? 'text-slate-200 hover:text-emerald-400 after:bg-emerald-400'
-                    : 'text-slate-800 hover:text-soil-primary after:bg-soil-primary'
-                }`}
+                className="text-sm font-semibold transition-colors relative py-1 text-slate-200 hover:text-emerald-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:w-full after:transition-all after:bg-emerald-400"
               >
                 {link.name}
               </a>
@@ -221,25 +211,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* CTAs */}
             <button
               onClick={() => onOpenModal('local')}
-              className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-sm ${
-                scrolled
-                  ? 'bg-emerald-950/90 border border-emerald-500/50 text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 hover:border-emerald-500'
-                  : 'bg-emerald-50 border border-emerald-600/40 text-emerald-800 hover:bg-emerald-600 hover:text-white'
-              }`}
+              className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-sm bg-[#0e2c19]/80 border border-emerald-800/60 text-emerald-200 hover:bg-[#164227] hover:text-white"
             >
-              <Users className="w-3.5 h-3.5" />
+              <Users className="w-3.5 h-3.5 text-emerald-400" />
               <span>Local Farmer</span>
             </button>
 
             <button
               onClick={() => onOpenModal('enterprise')}
-              className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-md ${
-                scrolled
-                  ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/25'
-                  : 'bg-soil-primary hover:bg-emerald-800 text-white shadow-soil-primary/20'
-              }`}
+              className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-md bg-[#082012] hover:bg-emerald-600 text-emerald-100 hover:text-white border border-emerald-800/80 hover:border-emerald-500"
             >
-              <Tractor className="w-3.5 h-3.5" />
+              <Tractor className="w-3.5 h-3.5 text-emerald-400" />
               <span>Enterprise Suite</span>
             </button>
           </div>
@@ -345,19 +327,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-1">
+            <div className="pt-3 border-t border-[#1e341b] flex flex-col space-y-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenModal('local');
                 }}
-                className={`flex items-center justify-center space-x-2 py-2.5 px-3 rounded-xl font-bold text-xs border ${
-                  scrolled
-                    ? 'bg-emerald-950 text-emerald-300 border-emerald-500/50'
-                    : 'bg-emerald-50 text-emerald-800 border-emerald-600/40'
-                }`}
+                className="flex items-center justify-center space-x-2 py-2.5 px-3 rounded-xl font-bold text-xs bg-[#0e2c19] text-emerald-200 border border-emerald-800/60"
               >
-                <Users className="w-4 h-4" />
+                <Users className="w-4 h-4 text-emerald-400" />
                 <span>Local Farmer</span>
               </button>
               <button
@@ -365,13 +343,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onOpenModal('enterprise');
                 }}
-                className={`flex items-center justify-center space-x-2 py-2.5 px-3 rounded-xl font-bold text-xs shadow-md ${
-                  scrolled
-                    ? 'bg-emerald-500 text-slate-950'
-                    : 'bg-soil-primary text-white'
-                }`}
+                className="flex items-center justify-center space-x-2 py-2.5 px-3 rounded-xl font-bold text-xs shadow-md bg-[#082012] hover:bg-emerald-600 text-emerald-100 hover:text-white border border-emerald-800/80 hover:border-emerald-500 transition-all"
               >
-                <Tractor className="w-4 h-4" />
+                <Tractor className="w-4 h-4 text-emerald-400" />
                 <span>Enterprise Suite</span>
               </button>
             </div>

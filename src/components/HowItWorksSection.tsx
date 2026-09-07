@@ -71,7 +71,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
   ];
 
   return (
-    <section id="how-it-works" className="py-24 bg-white text-slate-900 relative overflow-hidden">
+    <section id="how-it-works" className="py-24 bg-gradient-to-b from-[#faf5eb] via-[#f7f0e2] to-[#ede1c7] text-slate-900 relative overflow-hidden border-y border-[#d8c7a8]">
       
       {/* Background Soil Grid */}
       <div className="absolute inset-0 soil-grid-bg opacity-70 pointer-events-none" />
@@ -80,15 +80,15 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-soil-primary">
-            <Layers className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#e8dec7] border border-[#cfbe9e] text-xs font-semibold text-[#4d3815]">
+            <Layers className="w-3.5 h-3.5 text-emerald-800" />
             <span>Proximal Scanning Sensing Precision Stack</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-slate-900">
             From Proximal Soil Scan to AI in <br className="hidden sm:block" />
-            <span className="text-soil-primary">3 Precision Steps</span>
+            <span className="text-emerald-800">3 Precision Steps</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
+          <p className="text-sm sm:text-base text-slate-700 font-medium">
             Powered exclusively by Proximal Scanning Sensing to inspect real-time soil content with 99.8% field accuracy.
           </p>
         </div>
@@ -97,7 +97,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           
           {/* Connector Line for Desktop */}
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-slate-200 -translate-y-12 z-0" />
+          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-[#d8c7a8] -translate-y-12 z-0" />
 
           {steps.map((step, idx) => {
             const IconComponent = step.icon;
@@ -109,7 +109,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.2 }}
                 onClick={onOpenScanner}
-                className="relative z-10 bg-white/90 backdrop-blur-md rounded-3xl p-8 border border-slate-200 shadow-xl hover:shadow-card-hover hover:border-soil-primary/40 transition-all flex flex-col justify-between group cursor-pointer"
+                className="relative z-10 bg-white/95 backdrop-blur-md rounded-3xl p-8 border border-[#d8c7a8] shadow-xl hover:shadow-card-hover hover:border-emerald-700/60 transition-all flex flex-col justify-between group cursor-pointer"
               >
                 <div>
                   {/* Top Step Pill & Icon */}
@@ -153,7 +153,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
         </div>
 
         {/* Live Soil Diagnostic Simulator Callout */}
-        <div className="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden border border-slate-800">
+        <div className="mt-16 bg-[#06180e] text-white rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden border border-[#1b3820]">
           <div className="absolute inset-0 tech-grid-overlay opacity-30 pointer-events-none" />
 
           <div className="relative z-10 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
@@ -165,7 +165,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
               <h3 className="text-2xl sm:text-3xl font-bold font-display">
                 Launch Live Proximal Soil Scanner & AI
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
+              <p className="text-xs sm:text-sm text-emerald-200/80 max-w-xl">
                 Experience how instant Proximal Scanning Sensing captures optical N-P-K readings and feeds them to the prescriptive AI engine in under 3 seconds.
               </p>
             </div>
@@ -173,9 +173,9 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenScanner }) 
             <button
               onClick={startSimulation}
               disabled={isSimulatingScan}
-              className="flex items-center space-x-3 px-8 py-4 rounded-xl bg-gradient-to-r from-soil-primary to-emerald-600 hover:from-soil-primaryHover hover:to-emerald-700 text-white font-bold text-sm shadow-xl hover:scale-105 active:scale-95 transition-all disabled:opacity-50 shrink-0"
+              className="flex items-center space-x-3 px-8 py-4 rounded-xl bg-gradient-to-r from-[#0d2a1b] to-[#1a4a2b] hover:from-[#113824] hover:to-[#225a34] text-emerald-100 font-bold text-sm shadow-xl border border-emerald-600/50 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 shrink-0"
             >
-              <Scan className="w-5 h-5 text-emerald-200 animate-pulse" />
+              <Scan className="w-5 h-5 text-emerald-300 animate-pulse" />
               <span>Launch Live Proximal Scanner</span>
             </button>
           </div>

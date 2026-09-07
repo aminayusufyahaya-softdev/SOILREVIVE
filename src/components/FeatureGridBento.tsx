@@ -32,10 +32,11 @@ export const FeatureGridBento: React.FC<FeatureGridBentoProps> = ({
   onOpenScanner
 }) => {
   return (
-    <section id="features" className="py-24 bg-slate-950 text-white relative overflow-hidden">
+    <section id="features" className="py-24 bg-gradient-to-b from-[#142316] via-[#091e12] to-[#122216] text-white relative overflow-hidden">
       
-      {/* Subtle Background Glows */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-soil-primary/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* Ambient Sandy & Green Glows */}
+      <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(206,169,107,0.15)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+      <div className="absolute bottom-1/4 left-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(16,185,129,0.15)_0%,transparent_70%)] pointer-events-none blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

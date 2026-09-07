@@ -44,7 +44,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans text-slate-900 selection:bg-soil-primary selection:text-white relative">
+    <div className="min-h-screen bg-[#07190f] font-sans text-slate-100 selection:bg-emerald-800 selection:text-emerald-100 relative">
       {/* Top Navbar */}
       <Navbar
         onOpenModal={handleOpenModal}

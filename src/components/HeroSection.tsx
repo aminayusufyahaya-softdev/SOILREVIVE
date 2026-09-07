@@ -30,28 +30,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   return (
-    <section className="relative min-h-[95vh] pt-28 pb-16 flex items-center justify-center overflow-hidden bg-slate-950 text-white">
+    <section className="relative min-h-[95vh] pt-28 pb-16 flex items-center justify-center overflow-hidden bg-[#06180e] text-white">
+      {/* Ambient Sandy and Lush Green Glow Layers */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#06180e] via-[#0a2315] to-[#122216] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(206,169,107,0.18)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(16,185,129,0.16)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+
       {/* Background Hero Visual with Data Grid Animation */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Unsplash High Quality Image of African Farmer with Mobile Soil Probe */}
+        {/* High Quality Image of African Farmer with Mobile Soil Probe */}
         <img
           src="https://images.unsplash.com/photo-1592417817098-8f3d6eb19655?q=80&w=2000&auto=format&fit=crop"
           alt="Nigerian farmer testing soil content with proximal sensing probe"
-          className="w-full h-full object-cover object-center opacity-30 scale-105 transform filter contrast-110 brightness-90"
+          className="w-full h-full object-cover object-center opacity-25 scale-105 transform filter contrast-110 brightness-90"
         />
 
         {/* Gradient overlays for readability and Earth-Tech styling */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#06180e] via-[#06180e]/90 to-[#06180e]/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#122216] via-transparent to-[#06180e]/70" />
         
         {/* Animated Tech Data Grid Overlay */}
-        <div className="absolute inset-0 tech-grid-overlay opacity-30 mix-blend-overlay pointer-events-none" />
+        <div className="absolute inset-0 tech-grid-overlay opacity-25 mix-blend-overlay pointer-events-none" />
 
         {/* Floating animated soil data particles */}
         <motion.div
           animate={{ y: [0, -20, 0], opacity: [0.3, 0.7, 0.3] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-soil-primary/20 blur-3xl pointer-events-none"
+          className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-amber-500/15 blur-3xl pointer-events-none"
         />
         <motion.div
           animate={{ y: [0, 25, 0], opacity: [0.2, 0.6, 0.2] }}
@@ -204,26 +209,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative rounded-3xl bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-950 border border-slate-800 hover:border-blue-500/50 p-5 sm:p-6 shadow-2xl backdrop-blur-xl transition-all"
+              className="relative rounded-3xl bg-gradient-to-b from-[#081d11]/95 via-[#0b2416]/90 to-[#0e2115] border border-[#1f3a22] hover:border-emerald-500/50 p-5 sm:p-6 shadow-2xl backdrop-blur-xl transition-all"
             >
-              {/* Telemetry View Switcher: Farmer vs Enterprise Suite */}
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                <div className="flex items-center space-x-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
+              {/* Telemetry View Switcher: Smallholder vs Enterprise Suite */}
+              <div className="flex items-center justify-between border-b border-[#1b341f] pb-3 mb-4">
+                <div className="flex items-center space-x-1.5 bg-[#05150c] p-1 rounded-xl border border-emerald-950">
                   <button
                     onClick={() => setTelemetryMode('farmer')}
                     className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
                       telemetryMode === 'farmer'
-                        ? 'bg-emerald-600 text-white shadow-sm'
+                        ? 'bg-[#082012] text-emerald-200 border border-emerald-700/80 shadow-md'
                         : 'text-slate-400 hover:text-slate-200'
                     }`}
                   >
-                    Plot Level
+                    Smallholder Plot
                   </button>
                   <button
                     onClick={() => setTelemetryMode('enterprise')}
                     className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center space-x-1 ${
                       telemetryMode === 'enterprise'
-                        ? 'bg-blue-600 text-white shadow-sm'
+                        ? 'bg-[#0a2638] text-cyan-200 border border-cyan-700/80 shadow-md'
                         : 'text-slate-400 hover:text-slate-200'
                     }`}
                   >

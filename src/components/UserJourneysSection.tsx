@@ -8,26 +8,28 @@ interface UserJourneysSectionProps {
 
 export const UserJourneysSection: React.FC<UserJourneysSectionProps> = ({ onOpenModal }) => {
   return (
-    <section id="stories" className="py-24 bg-slate-900 text-white relative overflow-hidden">
+    <section id="stories" className="py-24 bg-gradient-to-b from-[#122216] via-[#091e12] to-[#122216] text-white relative overflow-hidden">
       
-      {/* Background Grid */}
+      {/* Sandy & Green Glow Overlays */}
+      <div className="absolute top-1/3 left-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(206,169,107,0.14)_0%,transparent_70%)] pointer-events-none blur-3xl" />
+      <div className="absolute bottom-1/3 right-10 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(16,185,129,0.15)_0%,transparent_70%)] pointer-events-none blur-3xl" />
       <div className="absolute inset-0 tech-grid-overlay opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs font-semibold text-emerald-400">
-            <Quote className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#071a10] border border-amber-600/40 text-xs font-semibold text-amber-200">
+            <Quote className="w-3.5 h-3.5 text-amber-400" />
             <span>Real Impact Across Nigeria</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-white">
             User Journeys: From Soil Scans to <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-amber-300 to-teal-300">
               Guaranteed Farm Profits
             </span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-300">
+          <p className="text-sm sm:text-base text-emerald-100/80">
             Discover how smallholders and enterprise managers unlock precision agronomy tailored to their localized farming realities.
           </p>
         </div>
@@ -41,7 +43,7 @@ export const UserJourneysSection: React.FC<UserJourneysSectionProps> = ({ onOpen
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-emerald-500/30 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
+            className="bg-gradient-to-br from-[#081d11] via-[#0a2315] to-[#06170e] border border-emerald-600/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
           >
             <div>
               {/* Header Avatar & Profile Info */}
@@ -137,7 +139,7 @@ export const UserJourneysSection: React.FC<UserJourneysSectionProps> = ({ onOpen
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-blue-500/30 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
+            className="bg-gradient-to-br from-[#081d11] via-[#0a2315] to-[#0c1a24] border border-[#1b3a28] rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
           >
             <div>
               {/* Header Avatar & Profile Info */}

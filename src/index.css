@@ -3,9 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-[#f8fafc] text-slate-900 overflow-x-hidden;
+    @apply bg-[#07190f] text-slate-100 overflow-x-hidden;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: #07190f;
+    background-image: 
+      radial-gradient(at 10% 12%, rgba(13, 75, 38, 0.45) 0px, transparent 55%),
+      radial-gradient(at 90% 20%, rgba(206, 169, 107, 0.22) 0px, transparent 50%),
+      radial-gradient(at 15% 75%, rgba(184, 147, 85, 0.16) 0px, transparent 55%),
+      radial-gradient(at 85% 85%, rgba(16, 140, 75, 0.25) 0px, transparent 50%);
+    background-attachment: fixed;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -13,12 +24,12 @@
   }
 }
 
-/* Custom Soil Particle Floating Background Effect */
+/* Custom Soil Particle Floating Background Effect with Green & Sandy Earth lines */
 .soil-grid-bg {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(45, 80, 22, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(45, 80, 22, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(206, 169, 107, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46, 125, 50, 0.08) 1px, transparent 1px);
 }
 
 .tech-grid-overlay {

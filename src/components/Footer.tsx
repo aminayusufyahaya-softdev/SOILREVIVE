@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Sprout, Globe, Mail, Send, CheckCircle2, Shield, Heart } from 'lucide-react';
 import { SUPPORTED_LANGUAGES } from '../data/languages';
+import { apiService } from '../services/apiService';
 
 interface FooterProps {
   selectedLang: string;
@@ -21,22 +22,27 @@ export const Footer: React.FC<FooterProps> = ({
   const [subscribed, setSubscribed] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm<NewsletterFormInputs>();
 
-  const onSubmit = (data: NewsletterFormInputs) => {
+  const onSubmit = async (data: NewsletterFormInputs) => {
     setSubscribed(true);
     reset();
+    try {
+      await apiService.subscribeNewsletter(data.email);
+    } catch {
+      // Handled
+    }
     setTimeout(() => setSubscribed(false), 5000);
   };
 
   const languages = SUPPORTED_LANGUAGES;
 
   return (
-    <footer className="bg-slate-950 text-white border-t border-slate-900 pt-16 pb-12 relative overflow-hidden">
+    <footer className="bg-[#05140b] text-white border-t border-[#1b2f19] pt-16 pb-12 relative overflow-hidden">
       
       {/* Soil Grid Background */}
       <div className="absolute inset-0 tech-grid-overlay opacity-15 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-slate-900">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-[#1b2f19]">
           
           {/* Brand Info (4 Cols) */}
           <div className="md:col-span-4 space-y-4">

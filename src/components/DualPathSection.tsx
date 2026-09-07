@@ -87,55 +87,55 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
   };
 
   return (
-    <section id="dual-path" className="py-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden">
-      {/* Glow Effects */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-soil-primary/20 rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-blue-600/25 rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
+    <section id="dual-path" className="py-24 bg-gradient-to-b from-[#122216] via-[#0b1f14] to-[#142316] text-white relative overflow-hidden">
+      {/* Sandy & Green Glow Effects */}
+      <div className="absolute top-1/2 left-0 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(206,169,107,0.15)_0%,transparent_70%)] pointer-events-none blur-3xl -translate-y-1/2" />
+      <div className="absolute top-1/2 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(16,185,129,0.15)_0%,transparent_70%)] pointer-events-none blur-3xl -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-slate-900 border border-blue-500/40 text-xs font-bold text-blue-300 shadow-lg">
-            <Sparkles className="w-4 h-4 text-blue-400" />
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#07190f] border border-amber-600/40 text-xs font-bold text-amber-200 shadow-lg">
+            <Sparkles className="w-4 h-4 text-amber-400" />
             <span>Dual-Path Value Architecture</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white">
             Tailored Soil Intelligence for <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-amber-300 to-teal-300">
               Every Nigerian Scale & Capability
             </span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-200 font-medium">
+          <p className="text-sm sm:text-base text-emerald-100/80 font-medium">
             Whether managing a 0.5-hectare smallholder plot via voice USSD or orchestrating a 50-hectare commercial farm with connected machinery & digital tool suites.
           </p>
 
           {/* Interactive Toggle Switch */}
           <div className="pt-4 flex justify-center">
-            <div className="bg-slate-900/90 p-2 rounded-2xl border border-slate-700 flex items-center space-x-2 shadow-2xl backdrop-blur-lg">
+            <div className="bg-[#06180e]/95 p-2 rounded-2xl border border-[#1b341f] flex items-center space-x-2 shadow-2xl backdrop-blur-lg">
               <button
                 onClick={() => setActiveTab('local')}
                 className={`flex items-center space-x-2.5 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   activeTab === 'local'
-                    ? 'bg-gradient-to-r from-soil-primary to-emerald-700 text-white shadow-lg shadow-soil-primary/30 ring-2 ring-emerald-400/50'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                    ? 'bg-gradient-to-r from-[#082012] to-[#123821] text-emerald-200 border border-emerald-600/70 shadow-lg ring-2 ring-emerald-500/30'
+                    : 'text-slate-300 hover:text-white hover:bg-[#0c2416]'
                 }`}
               >
                 <Smartphone className="w-4 h-4 text-emerald-400" />
-                <span>Local Farmer (Voice & USSD Hub)</span>
+                <span>Smallholder & Cooperative Suite</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('modern')}
                 className={`flex items-center space-x-2.5 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   activeTab === 'modern'
-                    ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500 text-white shadow-xl shadow-blue-600/40 ring-2 ring-blue-400/60'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                    ? 'bg-gradient-to-r from-[#0a273b] to-[#133d59] text-cyan-200 border border-cyan-500/70 shadow-xl ring-2 ring-cyan-400/40'
+                    : 'text-slate-300 hover:text-white hover:bg-[#0c2416]'
                 }`}
               >
-                <Tractor className="w-4 h-4 text-blue-300" />
-                <span>Modern Farmer (Connected Equipment Hub)</span>
-                <span className="ml-1 text-[10px] bg-blue-500 text-slate-950 px-2 py-0.5 rounded-full font-black uppercase tracking-wider">
+                <Tractor className="w-4 h-4 text-cyan-300" />
+                <span>Enterprise Agribusiness Hub</span>
+                <span className="ml-1 text-[10px] bg-cyan-500 text-slate-950 px-2 py-0.5 rounded-full font-black uppercase tracking-wider">
                   Active
                 </span>
               </button>
@@ -155,7 +155,7 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
             >
               {/* Left Info Column */}
-              <div className="lg:col-span-6 bg-slate-900/90 border border-emerald-500/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden backdrop-blur-xl">
+              <div className="lg:col-span-6 bg-[#07190e]/95 border border-emerald-600/50 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden backdrop-blur-xl">
                 <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                   <Smartphone className="w-64 h-64 text-emerald-400" />
                 </div>
@@ -313,7 +313,7 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
             >
               {/* Left Column: Modern Farm Suite Overview & Capabilities */}
-              <div className="lg:col-span-5 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border border-blue-500/50 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden backdrop-blur-xl">
+              <div className="lg:col-span-5 bg-gradient-to-b from-[#07190f] via-[#0a2214] to-[#0c1c24] border border-[#1b3b26] rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden backdrop-blur-xl">
                 <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                   <Tractor className="w-64 h-64 text-blue-400" />
                 </div>
@@ -385,8 +385,8 @@ export const DualPathSection: React.FC<DualPathSectionProps> = ({
               </div>
 
               {/* Right Column: ACTIVE MODERN FARM MACHINERY & TOOLS CONNECTIVITY HUB */}
-              <div className="lg:col-span-7 bg-slate-900 border border-blue-500/40 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="lg:col-span-7 bg-[#07190f] border border-[#1b3d27] rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div>
                   {/* Connectivity Header Bar */}

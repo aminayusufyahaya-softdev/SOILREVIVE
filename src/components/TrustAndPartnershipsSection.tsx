@@ -77,24 +77,24 @@ export const TrustAndPartnershipsSection: React.FC = () => {
   };
 
   return (
-    <section id="partners" className="py-24 bg-white text-slate-900 relative overflow-hidden">
+    <section id="partners" className="py-24 bg-gradient-to-b from-[#faf5eb] via-[#f7f0e3] to-[#ede1c7] text-slate-900 relative overflow-hidden border-y border-[#d8c7a8]">
       
       {/* Background decoration */}
-      <div className="absolute inset-0 soil-grid-bg opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 soil-grid-bg opacity-70 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-soil-primary">
-            <ShieldCheck className="w-3.5 h-3.5 text-soil-primary" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#e8dec7] border border-[#cfbe9e] text-xs font-semibold text-[#4d3815]">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-800" />
             <span>Trusted Partnerships & Science</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-slate-900">
             Validated by Science, <br className="hidden sm:block" />
-            <span className="text-soil-primary">Trusted by Communities</span>
+            <span className="text-emerald-800">Trusted by Communities</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
+          <p className="text-sm sm:text-base text-slate-700 font-medium">
             SOILREVIVE operates in direct technical partnership with international agricultural research bodies and Nigerian federal quarantine authorities.
           </p>
         </div>
@@ -108,20 +108,20 @@ export const TrustAndPartnershipsSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-soil-primary/40 hover:bg-emerald-50/50 transition-all text-center group flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-white/95 border border-[#d8c7a8] hover:border-emerald-700/60 hover:bg-[#fffdfa] transition-all text-center group flex flex-col justify-between shadow-sm"
             >
               <div>
-                <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded bg-slate-200 text-slate-700 block mb-2 mx-auto w-max">
+                <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded bg-[#f0e7d5] text-[#523f1c] block mb-2 mx-auto w-max border border-[#d8c8ab]">
                   {partner.badge}
                 </span>
-                <h4 className="text-xl font-extrabold font-display text-slate-900 group-hover:text-soil-primary transition-colors">
+                <h4 className="text-xl font-extrabold font-display text-slate-900 group-hover:text-emerald-800 transition-colors">
                   {partner.name}
                 </h4>
                 <p className="text-[11px] font-semibold text-slate-600 mt-1 line-clamp-1">
                   {partner.fullName}
                 </p>
               </div>
-              <p className="text-[10px] text-slate-400 mt-3 pt-2 border-t border-slate-200">
+              <p className="text-[10px] text-slate-400 mt-3 pt-2 border-t border-[#e8ddc8]">
                 {partner.role}
               </p>
             </motion.div>
@@ -129,7 +129,7 @@ export const TrustAndPartnershipsSection: React.FC = () => {
         </div>
 
         {/* Testimonials Carousel Section */}
-        <div className="bg-slate-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-slate-800">
+        <div className="bg-[#06180e] text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-[#1b3820]">
           <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none">
             <Quote className="w-64 h-64 text-emerald-500" />
           </div>
