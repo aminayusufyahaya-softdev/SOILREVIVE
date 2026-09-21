@@ -12,8 +12,10 @@ import { MultilingualAiChat } from './components/MultilingualAiChat';
 import { ClimateIrrigationAlert } from './components/ClimateIrrigationAlert';
 import { DigitalSoilPassportModal } from './components/DigitalSoilPassportModal';
 import { ProximalSensingScannerModal } from './components/ProximalSensingScannerModal';
+import { FarmDashboard } from './components/FarmDashboard';
 
 export const App: React.FC = () => {
+  const [activeView, setActiveView] = useState<'landing' | 'console'>('landing');
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'local' | 'enterprise'>('local');
   const [selectedLang, setSelectedLang] = useState<string>('ig');
@@ -53,44 +55,70 @@ export const App: React.FC = () => {
         onOpenClimateAlert={() => setClimateModalOpen(true)}
         onOpenPassport={() => handleOpenPassportWithId()}
         onOpenScanner={() => setScannerModalOpen(true)}
+        activeView={activeView}
+        onViewChange={(view) => {
+          setActiveView(view);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
-      {/* Main Page Structure */}
+      {/* Main Page Structure: Landing Page vs Interactive Farm Console */}
       <main>
-        {/* 1. Hero Section */}
-        <HeroSection
-          onOpenModal={handleOpenModal}
-          selectedLang={selectedLang}
-          onOpenPassport={() => handleOpenPassportWithId()}
-          onOpenClimateAlert={() => setClimateModalOpen(true)}
-          onOpenScanner={() => setScannerModalOpen(true)}
-        />
+        {activeView === 'landing' ? (
+          <>
+            {/* 1. Hero Section */}
+            <HeroSection
+              onOpenModal={handleOpenModal}
+              selectedLang={selectedLang}
+              onOpenPassport={() => handleOpenPassportWithId()}
+              onOpenClimateAlert={() => setClimateModalOpen(true)}
+              onOpenScanner={() => setScannerModalOpen(true)}
+              onLaunchConsole={() => {
+                setActiveView('console');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
 
-        {/* 2. Dual-Path Value Proposition */}
-        <DualPathSection
-          onOpenModal={handleOpenModal}
-          selectedLang={selectedLang}
-        />
+            {/* 2. Dual-Path Value Proposition */}
+            <DualPathSection
+              onOpenModal={handleOpenModal}
+              selectedLang={selectedLang}
+            />
 
-        {/* 3. How It Works (The Technology Stack) */}
-        <HowItWorksSection onOpenScanner={() => setScannerModalOpen(true)} />
+            {/* 3. How It Works (The Technology Stack) */}
+            <HowItWorksSection onOpenScanner={() => setScannerModalOpen(true)} />
 
-        {/* 4. Feature Grid (Bento Box Style) */}
-        <FeatureGridBento
-          onOpenModal={handleOpenModal}
-          onOpenClimateAlert={() => setClimateModalOpen(true)}
-          onOpenPassport={() => handleOpenPassportWithId()}
-          onOpenScanner={() => setScannerModalOpen(true)}
-        />
+            {/* 4. Feature Grid (Bento Box Style) */}
+            <FeatureGridBento
+              onOpenModal={handleOpenModal}
+              onOpenClimateAlert={() => setClimateModalOpen(true)}
+              onOpenPassport={() => handleOpenPassportWithId()}
+              onOpenScanner={() => setScannerModalOpen(true)}
+            />
 
-        {/* 5. User Journeys (Storytelling Section) */}
-        <UserJourneysSection onOpenModal={handleOpenModal} />
+            {/* 5. User Journeys (Storytelling Section) */}
+            <UserJourneysSection onOpenModal={handleOpenModal} />
 
-        {/* 6. Trust & Partnerships */}
-        <TrustAndPartnershipsSection />
+            {/* 6. Trust & Partnerships */}
+            <TrustAndPartnershipsSection />
+          </>
+        ) : (
+          /* Interactive Farm Console Workspace */
+          <FarmDashboard
+            onBackToLanding={() => {
+              setActiveView('landing');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenRegisterModal={handleOpenModal}
+            onOpenPassportModal={(id) => handleOpenPassportWithId(id)}
+            onOpenScannerModal={() => setScannerModalOpen(true)}
+            onOpenClimateModal={() => setClimateModalOpen(true)}
+            selectedLang={selectedLang}
+          />
+        )}
       </main>
 
-      {/* 7. Footer */}
+      {/* Footer */}
       <Footer
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}

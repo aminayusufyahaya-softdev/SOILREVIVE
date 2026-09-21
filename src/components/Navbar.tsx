@@ -14,7 +14,10 @@ import {
   Database,
   Wifi,
   Scan,
-  Camera
+  Camera,
+  Activity,
+  ArrowLeft,
+  LayoutDashboard
 } from 'lucide-react';
 
 import { SUPPORTED_LANGUAGES } from '../data/languages';
@@ -26,6 +29,8 @@ interface NavbarProps {
   onOpenClimateAlert?: () => void;
   onOpenPassport?: () => void;
   onOpenScanner?: () => void;
+  activeView?: 'landing' | 'console';
+  onViewChange?: (view: 'landing' | 'console') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -34,7 +39,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectLang,
   onOpenClimateAlert,
   onOpenPassport,
-  onOpenScanner
+  onOpenScanner,
+  activeView = 'landing',
+  onViewChange,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -69,7 +76,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center space-x-2.5 group">
+          <button
+            type="button"
+            onClick={() => onViewChange?.('landing')}
+            className="flex items-center space-x-2.5 group text-left focus:outline-none"
+          >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-800 to-[#1b2b18] border border-emerald-600/40 flex items-center justify-center text-white shadow-md shadow-emerald-950/40 group-hover:scale-105 transition-transform">
               <Sprout className="w-6 h-6 text-emerald-300" />
             </div>
@@ -81,23 +92,32 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </span>
               <p className="text-[10px] font-medium tracking-wide leading-none text-emerald-300/70 hidden sm:block">
-                Digital Soil Health Platform
+                {activeView === 'console' ? 'Interactive Farm Console' : 'Digital Soil Health Platform'}
               </p>
             </div>
-          </a>
+          </button>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden xl:flex items-center space-x-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-semibold transition-colors relative py-1 text-slate-200 hover:text-emerald-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:w-full after:transition-all after:bg-emerald-400"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
+          {activeView === 'landing' ? (
+            <nav className="hidden xl:flex items-center space-x-7">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-semibold transition-colors relative py-1 text-slate-200 hover:text-emerald-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 hover:after:w-full after:transition-all after:bg-emerald-400"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
+          ) : (
+            <nav className="hidden xl:flex items-center space-x-3">
+              <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-emerald-950/70 border border-emerald-500/30 text-xs font-semibold text-emerald-200">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Live Operational Console Mode</span>
+              </div>
+            </nav>
+          )}
 
           {/* Direct Interactive Modules Shortcuts */}
           <div className="hidden lg:flex items-center space-x-2">
@@ -208,21 +228,42 @@ export const Navbar: React.FC<NavbarProps> = ({
               </AnimatePresence>
             </div>
 
+            {/* Console / Landing Mode Switcher Button */}
+            {activeView === 'landing' ? (
+              <button
+                onClick={() => onViewChange?.('console')}
+                className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-lg bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 hover:scale-[1.02]"
+                title="Launch Interactive Farm Console"
+              >
+                <LayoutDashboard className="w-3.5 h-3.5 text-slate-950" />
+                <span>Launch Console</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => onViewChange?.('landing')}
+                className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-950/90 hover:bg-emerald-900 text-emerald-200 border border-emerald-500/40 hover:text-white shadow-sm"
+                title="Return to Public Landing Page"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Public Website</span>
+              </button>
+            )}
+
             {/* CTAs */}
             <button
               onClick={() => onOpenModal('local')}
-              className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-sm bg-[#0e2c19]/80 border border-emerald-800/60 text-emerald-200 hover:bg-[#164227] hover:text-white"
+              className="flex items-center space-x-1.5 px-3 py-2 rounded-xl transition-all text-xs font-bold shadow-sm bg-[#0e2c19]/80 border border-emerald-800/60 text-emerald-200 hover:bg-[#164227] hover:text-white"
             >
               <Users className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Local Farmer</span>
+              <span className="hidden lg:inline">Local Farmer</span>
             </button>
 
             <button
               onClick={() => onOpenModal('enterprise')}
-              className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-all text-xs font-bold shadow-md bg-[#082012] hover:bg-emerald-600 text-emerald-100 hover:text-white border border-emerald-800/80 hover:border-emerald-500"
+              className="flex items-center space-x-1.5 px-3 py-2 rounded-xl transition-all text-xs font-bold shadow-md bg-[#082012] hover:bg-emerald-600 text-emerald-100 hover:text-white border border-emerald-800/80 hover:border-emerald-500"
             >
               <Tractor className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Enterprise Suite</span>
+              <span className="hidden lg:inline">Enterprise</span>
             </button>
           </div>
 
@@ -274,22 +315,51 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'bg-white border-slate-200 text-slate-900'
             }`}
           >
-            <div className="flex flex-col space-y-3 pt-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-semibold py-1 border-b ${
-                    scrolled
-                      ? 'text-slate-200 hover:text-emerald-400 border-slate-800'
-                      : 'text-slate-800 hover:text-soil-primary border-slate-100'
-                  }`}
+            {/* Top View Mode Switcher in Mobile Drawer */}
+            <div className="pb-3 border-b border-emerald-900/40">
+              {activeView === 'landing' ? (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onViewChange?.('console');
+                  }}
+                  className="w-full flex items-center justify-center space-x-2 py-3 px-3 rounded-xl font-bold text-xs shadow-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950"
                 >
-                  {link.name}
-                </a>
-              ))}
+                  <LayoutDashboard className="w-4 h-4" />
+                  <span>Launch Farm Console</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onViewChange?.('landing');
+                  }}
+                  className="w-full flex items-center justify-center space-x-2 py-3 px-3 rounded-xl font-bold text-xs bg-emerald-950 text-emerald-200 border border-emerald-500/40"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back to Public Website</span>
+                </button>
+              )}
             </div>
+
+            {activeView === 'landing' && (
+              <div className="flex flex-col space-y-3 pt-2">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`text-sm font-semibold py-1 border-b ${
+                      scrolled
+                        ? 'text-slate-200 hover:text-emerald-400 border-slate-800'
+                        : 'text-slate-800 hover:text-soil-primary border-slate-100'
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+            )}
 
             {/* Mobile Direct Feature Buttons */}
             <div className="grid grid-cols-3 gap-2 pt-2">

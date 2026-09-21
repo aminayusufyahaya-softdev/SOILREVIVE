@@ -10,6 +10,7 @@ interface HeroSectionProps {
   onOpenPassport?: () => void;
   onOpenClimateAlert?: () => void;
   onOpenScanner?: () => void;
+  onLaunchConsole?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -17,7 +18,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   selectedLang = 'en',
   onOpenPassport,
   onOpenClimateAlert,
-  onOpenScanner
+  onOpenScanner,
+  onLaunchConsole
 }) => {
   const currentVoiceSample = AI_VOICE_SAMPLES[selectedLang] || AI_VOICE_SAMPLES.en;
   const [isPlaying, setIsPlaying] = useState(false);
@@ -129,35 +131,44 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2"
             >
-              {/* Primary CTA: Launch Live Proximal Scanner */}
+              {/* Primary CTA: Launch Farm Console */}
               <button
-                onClick={onOpenScanner}
-                className="group flex items-center justify-center space-x-2.5 px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-sm shadow-xl shadow-emerald-600/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                onClick={onLaunchConsole}
+                className="group flex items-center justify-center space-x-2.5 px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold text-sm shadow-xl shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                <Scan className="w-4 h-4 text-emerald-200 animate-pulse" />
-                <span>Launch Soil Scanner</span>
-                <ArrowRight className="w-4 h-4 text-white/80 group-hover:translate-x-1 transition-transform" />
+                <Sparkles className="w-4 h-4 text-slate-950" />
+                <span>Launch Farm Console</span>
+                <ArrowRight className="w-4 h-4 text-slate-950/80 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              {/* ENTERPRISE SUITE BUTTON: Immediately Visible Above the Fold */}
+              {/* Secondary CTA: Launch Live Proximal Scanner Modal */}
+              <button
+                onClick={onOpenScanner}
+                className="group flex items-center justify-center space-x-2.5 px-4 py-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/40 hover:border-emerald-400 text-emerald-200 hover:text-white hover:bg-slate-800 font-bold text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <Scan className="w-4 h-4 text-emerald-400 animate-pulse" />
+                <span>Quick Scan</span>
+              </button>
+
+              {/* ENTERPRISE SUITE BUTTON */}
               <button
                 onClick={() => onOpenModal('enterprise')}
-                className="group flex items-center justify-center space-x-2.5 px-5 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-xl shadow-blue-600/30 ring-1 ring-blue-400/50 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="group flex items-center justify-center space-x-2.5 px-4 py-3.5 rounded-xl bg-gradient-to-r from-blue-700 via-indigo-700 to-cyan-700 hover:from-blue-600 hover:to-indigo-600 text-white font-bold text-sm shadow-xl shadow-blue-600/30 ring-1 ring-blue-400/50 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Tractor className="w-4 h-4 text-cyan-200 group-hover:rotate-6 transition-transform" />
-                <span>Enterprise Suite Demo</span>
-                <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-md uppercase font-black tracking-wider">
-                  Live
+                <span>Enterprise Suite</span>
+                <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded uppercase font-black tracking-wider">
+                  Demo
                 </span>
               </button>
 
-              {/* Secondary CTA: Soil Passport */}
+              {/* Soil Passport CTA */}
               <button
                 onClick={onOpenPassport}
-                className="group flex items-center justify-center space-x-2 px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-slate-500 text-slate-200 hover:bg-slate-800 font-semibold text-sm backdrop-blur-md transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="group flex items-center justify-center space-x-1.5 px-3.5 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-slate-500 text-slate-200 hover:bg-slate-800 font-semibold text-sm backdrop-blur-md transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Award className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
-                <span>Soil Passport</span>
+                <span>Passport</span>
               </button>
             </motion.div>
 

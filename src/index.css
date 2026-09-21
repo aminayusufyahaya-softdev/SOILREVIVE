@@ -8,7 +8,8 @@
   }
 
   body {
-    @apply bg-[#07190f] text-slate-100 overflow-x-hidden;
+    overflow-x: hidden;
+    color: #f1f5f9;
     font-feature-settings: "rlig" 1, "calt" 1;
     background-color: #07190f;
     background-image: 
