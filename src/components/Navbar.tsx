@@ -17,10 +17,16 @@ import {
   Camera,
   Activity,
   ArrowLeft,
-  LayoutDashboard
+  LayoutDashboard,
+  LogIn,
+  UserPlus,
+  LogOut,
+  UserCheck,
+  Lock
 } from 'lucide-react';
 
 import { SUPPORTED_LANGUAGES } from '../data/languages';
+import { UserProfile } from '../services/authService';
 
 interface NavbarProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
@@ -31,6 +37,9 @@ interface NavbarProps {
   onOpenScanner?: () => void;
   activeView?: 'landing' | 'console';
   onViewChange?: (view: 'landing' | 'console') => void;
+  user?: UserProfile | null;
+  onOpenAuth?: (mode: 'login' | 'signup') => void;
+  onLogout?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -42,6 +51,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenScanner,
   activeView = 'landing',
   onViewChange,
+  user,
+  onOpenAuth,
+  onLogout,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -125,10 +137,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenScanner}
               className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-600/20"
-              title="Launch Live Proximal Soil Scanner"
+              title={user ? "Launch Live Proximal Soil Scanner" : "Registration Required to use Proximal Soil Scanner"}
             >
               <Scan className="w-3.5 h-3.5 animate-pulse" />
               <span>Proximal Scan</span>
+              {!user && <Lock className="w-3 h-3 text-amber-300 ml-0.5" />}
             </button>
 
             <button
@@ -138,10 +151,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   ? 'bg-blue-950/80 border-blue-500/40 text-blue-300 hover:bg-blue-900'
                   : 'bg-blue-50 border-blue-300 text-blue-700 hover:bg-blue-100'
               }`}
-              title="Open Digital Soil Passport Suite"
+              title={user ? "Open Digital Soil Passport Suite" : "Registration Required to view Soil Passports"}
             >
               <Award className="w-3.5 h-3.5 text-blue-400" />
               <span>Soil Passport</span>
+              {!user && <Lock className="w-3 h-3 text-amber-300 ml-0.5" />}
             </button>
 
             <button
@@ -151,10 +165,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   ? 'bg-teal-950/80 border-teal-500/40 text-teal-300 hover:bg-teal-900'
                   : 'bg-teal-50 border-teal-300 text-teal-700 hover:bg-teal-100'
               }`}
-              title="Open Climate & Irrigation Alerts"
+              title={user ? "Open Climate & Irrigation Alerts" : "Registration Required for Climate Alerts"}
             >
               <CloudSun className="w-3.5 h-3.5 text-teal-400" />
               <span>Climate Alerts</span>
+              {!user && <Lock className="w-3 h-3 text-amber-300 ml-0.5" />}
             </button>
           </div>
 
@@ -228,25 +243,74 @@ export const Navbar: React.FC<NavbarProps> = ({
               </AnimatePresence>
             </div>
 
-            {/* Console / Landing Mode Switcher Button */}
-            {activeView === 'landing' ? (
-              <button
-                onClick={() => onViewChange?.('console')}
-                className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-lg bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 hover:scale-[1.02]"
-                title="Launch Interactive Farm Console"
-              >
-                <LayoutDashboard className="w-3.5 h-3.5 text-slate-950" />
-                <span>Launch Console</span>
-              </button>
+            {/* Auth / Console Mode Controls */}
+            {user ? (
+              <div className="flex items-center space-x-2">
+                {activeView === 'landing' ? (
+                  <button
+                    onClick={() => onViewChange?.('console')}
+                    className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-lg bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 hover:scale-[1.02]"
+                    title="Launch Interactive Farm Console"
+                  >
+                    <LayoutDashboard className="w-3.5 h-3.5 text-slate-950" />
+                    <span>My Dashboard</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => onViewChange?.('landing')}
+                    className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-950/90 hover:bg-emerald-900 text-emerald-200 border border-emerald-500/40 hover:text-white shadow-sm"
+                    title="Return to Public Landing Page"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Public Website</span>
+                  </button>
+                )}
+
+                {/* Logged in User Profile Chip */}
+                <div className="hidden xl:flex items-center space-x-2 px-2.5 py-1.5 rounded-xl bg-[#082012] border border-emerald-600/40 text-xs">
+                  <div className="w-6 h-6 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white text-[11px] shadow-sm">
+                    {user.name.charAt(0)}
+                  </div>
+                  <div className="text-left">
+                    <div className="font-bold text-white text-[11px] leading-tight truncate max-w-[100px]">
+                      {user.name.split(' ')[0]}
+                    </div>
+                    <div className="text-[9px] text-emerald-300/80 leading-none">
+                      {user.roleTitle.split(' ')[0]}
+                    </div>
+                  </div>
+                </div>
+
+                {onLogout && (
+                  <button
+                    onClick={onLogout}
+                    className="p-2 rounded-xl bg-slate-900/80 hover:bg-rose-950/80 border border-slate-700 hover:border-rose-600/60 text-slate-300 hover:text-rose-200 transition-all text-xs"
+                    title="Sign Out"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
             ) : (
-              <button
-                onClick={() => onViewChange?.('landing')}
-                className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-950/90 hover:bg-emerald-900 text-emerald-200 border border-emerald-500/40 hover:text-white shadow-sm"
-                title="Return to Public Landing Page"
-              >
-                <ArrowLeft className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Public Website</span>
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => onOpenAuth?.('login')}
+                  className="flex items-center space-x-1.5 px-3 py-2 rounded-xl transition-all text-xs font-bold bg-[#0c2816]/90 border border-emerald-700/60 text-emerald-200 hover:bg-[#133b21] hover:text-white shadow-sm"
+                  title="Sign in to your Farm Dashboard"
+                >
+                  <LogIn className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Log In</span>
+                </button>
+
+                <button
+                  onClick={() => onOpenAuth?.('signup')}
+                  className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-lg bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 hover:scale-[1.02]"
+                  title="Create a New Farm Account"
+                >
+                  <UserPlus className="w-3.5 h-3.5 text-slate-950" />
+                  <span>Sign Up</span>
+                </button>
+              </div>
             )}
 
             {/* CTAs */}
@@ -255,7 +319,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center space-x-1.5 px-3 py-2 rounded-xl transition-all text-xs font-bold shadow-sm bg-[#0e2c19]/80 border border-emerald-800/60 text-emerald-200 hover:bg-[#164227] hover:text-white"
             >
               <Users className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden lg:inline">Local Farmer</span>
+              <span className="hidden xl:inline">Local Farmer</span>
             </button>
 
             <button
@@ -263,7 +327,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center space-x-1.5 px-3 py-2 rounded-xl transition-all text-xs font-bold shadow-md bg-[#082012] hover:bg-emerald-600 text-emerald-100 hover:text-white border border-emerald-800/80 hover:border-emerald-500"
             >
               <Tractor className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden lg:inline">Enterprise</span>
+              <span className="hidden xl:inline">Enterprise</span>
             </button>
           </div>
 
@@ -316,29 +380,80 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             {/* Top View Mode Switcher in Mobile Drawer */}
-            <div className="pb-3 border-b border-emerald-900/40">
-              {activeView === 'landing' ? (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onViewChange?.('console');
-                  }}
-                  className="w-full flex items-center justify-center space-x-2 py-3 px-3 rounded-xl font-bold text-xs shadow-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950"
-                >
-                  <LayoutDashboard className="w-4 h-4" />
-                  <span>Launch Farm Console</span>
-                </button>
+            <div className="pb-3 border-b border-emerald-900/40 space-y-2">
+              {user ? (
+                <>
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-950/80 border border-emerald-600/40">
+                    <div className="flex items-center space-x-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white text-xs">
+                        {user.name.charAt(0)}
+                      </div>
+                      <div>
+                        <div className="font-bold text-white text-xs">{user.name}</div>
+                        <div className="text-[10px] text-emerald-300">{user.roleTitle}</div>
+                      </div>
+                    </div>
+                    {onLogout && (
+                      <button
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          onLogout();
+                        }}
+                        className="px-2.5 py-1 rounded-lg bg-rose-950/60 border border-rose-600/50 text-rose-300 text-xs font-bold flex items-center space-x-1"
+                      >
+                        <LogOut className="w-3 h-3" />
+                        <span>Sign Out</span>
+                      </button>
+                    )}
+                  </div>
+
+                  {activeView === 'landing' ? (
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        onViewChange?.('console');
+                      }}
+                      className="w-full flex items-center justify-center space-x-2 py-3 px-3 rounded-xl font-bold text-xs shadow-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950"
+                    >
+                      <LayoutDashboard className="w-4 h-4" />
+                      <span>Open Farm Console</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        onViewChange?.('landing');
+                      }}
+                      className="w-full flex items-center justify-center space-x-2 py-3 px-3 rounded-xl font-bold text-xs bg-emerald-950 text-emerald-200 border border-emerald-500/40"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      <span>Back to Public Website</span>
+                    </button>
+                  )}
+                </>
               ) : (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onViewChange?.('landing');
-                  }}
-                  className="w-full flex items-center justify-center space-x-2 py-3 px-3 rounded-xl font-bold text-xs bg-emerald-950 text-emerald-200 border border-emerald-500/40"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Public Website</span>
-                </button>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenAuth?.('login');
+                    }}
+                    className="flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl font-bold text-xs bg-[#0c2816] text-emerald-200 border border-emerald-700/60"
+                  >
+                    <LogIn className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Log In</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenAuth?.('signup');
+                    }}
+                    className="flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl font-bold text-xs bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md"
+                  >
+                    <UserPlus className="w-3.5 h-3.5" />
+                    <span>Sign Up</span>
+                  </button>
+                </div>
               )}
             </div>
 

@@ -32,12 +32,15 @@ import {
   ExternalLink,
   ChevronRight,
   ShoppingBag,
-  Volume2
+  Volume2,
+  LogOut,
+  UserCheck
 } from 'lucide-react';
 
 import { PRESET_PASSPORTS, SoilPassportRecord } from './DigitalSoilPassportModal';
 import { apiService, SoilScanPayload, SoilScanResult } from '../services/apiService';
 import { speakAiText } from '../data/languages';
+import { UserProfile } from '../services/authService';
 
 interface FarmDashboardProps {
   onBackToLanding: () => void;
@@ -46,6 +49,8 @@ interface FarmDashboardProps {
   onOpenScannerModal: () => void;
   onOpenClimateModal: () => void;
   selectedLang: string;
+  user?: UserProfile | null;
+  onLogout?: () => void;
 }
 
 interface FarmProfile {
@@ -124,6 +129,8 @@ export const FarmDashboard: React.FC<FarmDashboardProps> = ({
   onOpenScannerModal,
   onOpenClimateModal,
   selectedLang,
+  user,
+  onLogout,
 }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'scanner' | 'passports' | 'climate' | 'marketplace'>('overview');
   const [selectedFarm, setSelectedFarm] = useState<FarmProfile>(FARM_PROFILES[0]);
@@ -201,6 +208,29 @@ export const FarmDashboard: React.FC<FarmDashboardProps> = ({
 
           {/* Farm Plot Switcher & Quick Actions */}
           <div className="flex flex-wrap items-center gap-2.5">
+            {/* User Profile Card & Sign Out */}
+            {user && (
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#092213] border border-emerald-500/40 text-xs shadow-md">
+                <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white text-xs shadow-sm">
+                  {user.name.charAt(0)}
+                </div>
+                <div className="text-left hidden sm:block">
+                  <div className="font-bold text-white text-xs leading-tight">{user.name}</div>
+                  <div className="text-[10px] text-emerald-300/80 leading-none">{user.roleTitle}</div>
+                </div>
+                {onLogout && (
+                  <button
+                    onClick={onLogout}
+                    className="ml-1 p-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900/80 border border-rose-600/40 text-rose-300 hover:text-white transition-all text-xs flex items-center gap-1"
+                    title="Sign Out of Farm Dashboard"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                    <span className="hidden md:inline">Sign Out</span>
+                  </button>
+                )}
+              </div>
+            )}
+
             <div className="relative">
               <select
                 aria-label="Select Farm Cluster"

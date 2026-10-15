@@ -19,7 +19,8 @@ import {
   Camera,
   Scan,
   Award,
-  Activity
+  Activity,
+  Lock
 } from 'lucide-react';
 import {
   SUPPORTED_LANGUAGES,
@@ -29,6 +30,7 @@ import {
   LanguageOption
 } from '../data/languages';
 import { analyzeProximalSoilScan } from '../data/agronomyAiBackend';
+import { UserProfile } from '../services/authService';
 
 interface Message {
   id: string;
@@ -52,6 +54,8 @@ interface MultilingualAiChatProps {
   onOpenScanner?: () => void;
   externalPrompt?: string | null;
   onClearExternalPrompt?: () => void;
+  user?: UserProfile | null;
+  onRequireAuth?: (message?: string) => void;
 }
 
 export const MultilingualAiChat: React.FC<MultilingualAiChatProps> = ({
@@ -59,7 +63,9 @@ export const MultilingualAiChat: React.FC<MultilingualAiChatProps> = ({
   onSelectLang,
   onOpenScanner,
   externalPrompt,
-  onClearExternalPrompt
+  onClearExternalPrompt,
+  user,
+  onRequireAuth
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
@@ -251,7 +257,13 @@ export const MultilingualAiChat: React.FC<MultilingualAiChatProps> = ({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => {
+            if (!user && onRequireAuth) {
+              onRequireAuth('Please register or sign in with SoilRevive to consult the Multilingual AI Agronomist.');
+              return;
+            }
+            setIsOpen(!isOpen);
+          }}
           className="flex items-center space-x-2.5 px-4 py-3 rounded-2xl bg-gradient-to-r from-soil-primary to-emerald-700 text-white shadow-2xl shadow-soil-primary/40 border border-emerald-400/40 hover:shadow-soil-primary/60 transition-all font-sans"
           aria-label="Open Multilingual AI Assistant"
         >
@@ -260,7 +272,15 @@ export const MultilingualAiChat: React.FC<MultilingualAiChatProps> = ({
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
           </div>
           <div className="text-left hidden sm:block">
-            <span className="text-xs font-bold block leading-none">Agronomy AI</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs font-bold block leading-none">Agronomy AI</span>
+              {!user && (
+                <span className="text-[9px] font-bold px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-400/30 flex items-center gap-0.5">
+                  <Lock className="w-2.5 h-2.5" />
+                  <span>Lock</span>
+                </span>
+              )}
+            </div>
             <span className="text-[10px] text-emerald-200 uppercase font-mono">{currentLangObj.name}</span>
           </div>
         </motion.button>

@@ -13,6 +13,8 @@ import { ClimateIrrigationAlert } from './components/ClimateIrrigationAlert';
 import { DigitalSoilPassportModal } from './components/DigitalSoilPassportModal';
 import { ProximalSensingScannerModal } from './components/ProximalSensingScannerModal';
 import { FarmDashboard } from './components/FarmDashboard';
+import { AuthModal } from './components/AuthModal';
+import { authService, UserProfile, DEMO_USERS } from './services/authService';
 
 export const App: React.FC = () => {
   const [activeView, setActiveView] = useState<'landing' | 'console'>('landing');
@@ -20,12 +22,56 @@ export const App: React.FC = () => {
   const [modalType, setModalType] = useState<'local' | 'enterprise'>('local');
   const [selectedLang, setSelectedLang] = useState<string>('ig');
 
+  // Authentication & session state
+  const [user, setUser] = useState<UserProfile | null>(() => authService.getCurrentUser());
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const [authMessage, setAuthMessage] = useState<string | undefined>(undefined);
+
   // Active module states
   const [climateModalOpen, setClimateModalOpen] = useState(false);
   const [passportModalOpen, setPassportModalOpen] = useState(false);
   const [scannerModalOpen, setScannerModalOpen] = useState(false);
   const [passportTargetId, setPassportTargetId] = useState<string>('NG-SOIL-2026-8849');
   const [aiChatPrompt, setAiChatPrompt] = useState<string | null>(null);
+
+  const handleOpenAuth = (mode: 'login' | 'signup', msg?: string) => {
+    setAuthMode(mode);
+    setAuthMessage(msg);
+    setAuthModalOpen(true);
+  };
+
+  const handleAuthSuccess = (authenticatedUser: UserProfile) => {
+    setUser(authenticatedUser);
+    setAuthModalOpen(false);
+    setActiveView('console');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLogout = () => {
+    authService.logout();
+    setUser(null);
+    setActiveView('landing');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLaunchConsole = () => {
+    if (user) {
+      setActiveView('console');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      handleOpenAuth(
+        'signup',
+        '🔒 Registration Required: Please register or sign in with SoilRevive to access the Farm Console Dashboard.'
+      );
+    }
+  };
+
+  const handleQuickDemoLogin = async () => {
+    const demo = DEMO_USERS[0];
+    const loggedUser = await authService.login(demo.email);
+    handleAuthSuccess(loggedUser);
+  };
 
   const handleOpenModal = (type: 'local' | 'enterprise') => {
     setModalType(type);
@@ -36,12 +82,48 @@ export const App: React.FC = () => {
     setSelectedLang(lang);
   };
 
+  const handleOpenScanner = () => {
+    if (!user) {
+      handleOpenAuth(
+        'signup',
+        '🔒 Registration Required: Please register or sign in with SoilRevive to use the AI Proximal Soil Scanner.'
+      );
+      return;
+    }
+    setScannerModalOpen(true);
+  };
+
   const handleOpenPassportWithId = (id?: string) => {
+    if (!user) {
+      handleOpenAuth(
+        'signup',
+        '🔒 Registration Required: Please register or sign in with SoilRevive to view and verify Digital Soil Passports.'
+      );
+      return;
+    }
     if (id) setPassportTargetId(id);
     setPassportModalOpen(true);
   };
 
+  const handleOpenClimateAlert = () => {
+    if (!user) {
+      handleOpenAuth(
+        'signup',
+        '🔒 Registration Required: Please register or sign in with SoilRevive to access real-time Climate & Irrigation Alerts.'
+      );
+      return;
+    }
+    setClimateModalOpen(true);
+  };
+
   const handleOpenChatWithDiagnosis = (reportText: string) => {
+    if (!user) {
+      handleOpenAuth(
+        'signup',
+        '🔒 Registration Required: Please register or sign in with SoilRevive to access AI Diagnostics & Chat.'
+      );
+      return;
+    }
     setAiChatPrompt(reportText);
   };
 
@@ -52,31 +134,41 @@ export const App: React.FC = () => {
         onOpenModal={handleOpenModal}
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}
-        onOpenClimateAlert={() => setClimateModalOpen(true)}
+        onOpenClimateAlert={handleOpenClimateAlert}
         onOpenPassport={() => handleOpenPassportWithId()}
-        onOpenScanner={() => setScannerModalOpen(true)}
+        onOpenScanner={handleOpenScanner}
         activeView={activeView}
         onViewChange={(view) => {
+          if (view === 'console' && !user) {
+            handleOpenAuth(
+              'signup',
+              '🔒 Registration Required: Please register or sign in to access the Farm Console Dashboard.'
+            );
+            return;
+          }
           setActiveView(view);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        user={user}
+        onOpenAuth={handleOpenAuth}
+        onLogout={handleLogout}
       />
 
-      {/* Main Page Structure: Landing Page vs Interactive Farm Console */}
+      {/* Main Page Structure: Single Introductory Landing Page vs Farm Dashboard */}
       <main>
         {activeView === 'landing' ? (
           <>
-            {/* 1. Hero Section */}
+            {/* 1. Hero Section (Introduction to the Web Platform) */}
             <HeroSection
               onOpenModal={handleOpenModal}
               selectedLang={selectedLang}
               onOpenPassport={() => handleOpenPassportWithId()}
-              onOpenClimateAlert={() => setClimateModalOpen(true)}
-              onOpenScanner={() => setScannerModalOpen(true)}
-              onLaunchConsole={() => {
-                setActiveView('console');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onOpenClimateAlert={handleOpenClimateAlert}
+              onOpenScanner={handleOpenScanner}
+              onLaunchConsole={handleLaunchConsole}
+              user={user}
+              onOpenAuth={handleOpenAuth}
+              onQuickDemoLogin={handleQuickDemoLogin}
             />
 
             {/* 2. Dual-Path Value Proposition */}
@@ -86,14 +178,14 @@ export const App: React.FC = () => {
             />
 
             {/* 3. How It Works (The Technology Stack) */}
-            <HowItWorksSection onOpenScanner={() => setScannerModalOpen(true)} />
+            <HowItWorksSection onOpenScanner={handleOpenScanner} />
 
             {/* 4. Feature Grid (Bento Box Style) */}
             <FeatureGridBento
               onOpenModal={handleOpenModal}
-              onOpenClimateAlert={() => setClimateModalOpen(true)}
+              onOpenClimateAlert={handleOpenClimateAlert}
               onOpenPassport={() => handleOpenPassportWithId()}
-              onOpenScanner={() => setScannerModalOpen(true)}
+              onOpenScanner={handleOpenScanner}
             />
 
             {/* 5. User Journeys (Storytelling Section) */}
@@ -103,7 +195,7 @@ export const App: React.FC = () => {
             <TrustAndPartnershipsSection />
           </>
         ) : (
-          /* Interactive Farm Console Workspace */
+          /* Interactive Farm Console Workspace (Gated by Auth) */
           <FarmDashboard
             onBackToLanding={() => {
               setActiveView('landing');
@@ -111,9 +203,11 @@ export const App: React.FC = () => {
             }}
             onOpenRegisterModal={handleOpenModal}
             onOpenPassportModal={(id) => handleOpenPassportWithId(id)}
-            onOpenScannerModal={() => setScannerModalOpen(true)}
-            onOpenClimateModal={() => setClimateModalOpen(true)}
+            onOpenScannerModal={handleOpenScanner}
+            onOpenClimateModal={handleOpenClimateAlert}
             selectedLang={selectedLang}
+            user={user}
+            onLogout={handleLogout}
           />
         )}
       </main>
@@ -125,25 +219,34 @@ export const App: React.FC = () => {
         onOpenModal={handleOpenModal}
       />
 
-      {/* Active Live Proximal Sensing & AI Diagnostic Scanner Modal */}
+      {/* User Login & Sign-Up Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        initialMode={authMode}
+        onAuthSuccess={handleAuthSuccess}
+        message={authMessage}
+      />
+
+      {/* Active Live Proximal Sensing & AI Diagnostic Scanner Modal (Gated) */}
       <ProximalSensingScannerModal
-        isOpen={scannerModalOpen}
+        isOpen={scannerModalOpen && !!user}
         onClose={() => setScannerModalOpen(false)}
         selectedLang={selectedLang}
         onOpenPassport={(id) => handleOpenPassportWithId(id)}
         onOpenChatWithReport={(report) => handleOpenChatWithDiagnosis(report)}
       />
 
-      {/* Active Climate & Irrigation Precision Suite Modal */}
+      {/* Active Climate & Irrigation Precision Suite Modal (Gated) */}
       <ClimateIrrigationAlert
-        isOpen={climateModalOpen}
+        isOpen={climateModalOpen && !!user}
         onClose={() => setClimateModalOpen(false)}
         selectedLang={selectedLang}
       />
 
-      {/* Active Digital Soil Passport Verification Modal */}
+      {/* Active Digital Soil Passport Verification Modal (Gated) */}
       <DigitalSoilPassportModal
-        isOpen={passportModalOpen}
+        isOpen={passportModalOpen && !!user}
         onClose={() => setPassportModalOpen(false)}
         initialPassportId={passportTargetId}
         selectedLang={selectedLang}
@@ -156,13 +259,15 @@ export const App: React.FC = () => {
         initialType={modalType}
       />
 
-      {/* Floating Multilingual AI Chat Widget */}
+      {/* Floating Multilingual AI Chat Widget (Gated) */}
       <MultilingualAiChat
         selectedLang={selectedLang}
         onSelectLang={handleSelectLang}
-        onOpenScanner={() => setScannerModalOpen(true)}
+        onOpenScanner={handleOpenScanner}
         externalPrompt={aiChatPrompt}
         onClearExternalPrompt={() => setAiChatPrompt(null)}
+        user={user}
+        onRequireAuth={(msg) => handleOpenAuth('signup', msg)}
       />
     </div>
   );

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Tractor, ArrowRight, ShieldCheck, Radio, Cpu, Sparkles, Activity, Award, CloudSun, Database, Scan, BrainCircuit, Wifi } from 'lucide-react';
+import { Users, Tractor, ArrowRight, ShieldCheck, Radio, Cpu, Sparkles, Activity, Award, CloudSun, Database, Scan, BrainCircuit, Wifi, LogIn, UserPlus, Play, CheckCircle2, Lock } from 'lucide-react';
 
 import { AI_VOICE_SAMPLES, speakAiText } from '../data/languages';
+import { UserProfile } from '../services/authService';
 
 interface HeroSectionProps {
   onOpenModal: (type: 'local' | 'enterprise') => void;
@@ -11,6 +12,9 @@ interface HeroSectionProps {
   onOpenClimateAlert?: () => void;
   onOpenScanner?: () => void;
   onLaunchConsole?: () => void;
+  user?: UserProfile | null;
+  onOpenAuth?: (mode: 'login' | 'signup') => void;
+  onQuickDemoLogin?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -19,7 +23,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenPassport,
   onOpenClimateAlert,
   onOpenScanner,
-  onLaunchConsole
+  onLaunchConsole,
+  user,
+  onOpenAuth,
+  onQuickDemoLogin,
 }) => {
   const currentVoiceSample = AI_VOICE_SAMPLES[selectedLang] || AI_VOICE_SAMPLES.en;
   const [isPlaying, setIsPlaying] = useState(false);
@@ -108,20 +115,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display leading-[1.1] tracking-tight text-white"
             >
-              Inspect Soil Content via{' '}
+              Intelligent Soil Health &{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400">
-                Proximal Sensing.
+                Precision Agriculture.
               </span>
             </motion.h1>
 
-            {/* Subheadline */}
+            {/* Subheadline & Web Intro */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-slate-300 max-w-2xl font-normal leading-relaxed"
             >
-              AI-powered proximal soil sensing, optical root-zone telemetry, and verified input marketplaces for every Nigerian farmer—from smallholder plots to 50-hectare commercial farms.
+              Welcome to <strong className="text-emerald-400 font-bold">SOILREVIVE</strong>—the all-in-one digital soil intelligence platform. We combine real-time proximal sensing, optical root-zone diagnostics, localized voice advisory, and verifiable soil health passports. Sign in or create an account to access your personalized operational farm dashboard.
             </motion.p>
 
             {/* Action Buttons (Visible Before Scrolling) */}
@@ -129,47 +136,81 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center flex-wrap gap-3 pt-2"
             >
-              {/* Primary CTA: Launch Farm Console */}
-              <button
-                onClick={onLaunchConsole}
-                className="group flex items-center justify-center space-x-2.5 px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold text-sm shadow-xl shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <Sparkles className="w-4 h-4 text-slate-950" />
-                <span>Launch Farm Console</span>
-                <ArrowRight className="w-4 h-4 text-slate-950/80 group-hover:translate-x-1 transition-transform" />
-              </button>
+              {user ? (
+                <>
+                  {/* Authenticated CTA: Go to Dashboard */}
+                  <button
+                    onClick={onLaunchConsole}
+                    className="group flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold text-sm shadow-xl shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <Sparkles className="w-4 h-4 text-slate-950" />
+                    <span>Open Farm Dashboard ({user.name.split(' ')[0]})</span>
+                    <ArrowRight className="w-4 h-4 text-slate-950/80 group-hover:translate-x-1 transition-transform" />
+                  </button>
 
-              {/* Secondary CTA: Launch Live Proximal Scanner Modal */}
-              <button
-                onClick={onOpenScanner}
-                className="group flex items-center justify-center space-x-2.5 px-4 py-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/40 hover:border-emerald-400 text-emerald-200 hover:text-white hover:bg-slate-800 font-bold text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <Scan className="w-4 h-4 text-emerald-400 animate-pulse" />
-                <span>Quick Scan</span>
-              </button>
+                  <button
+                    onClick={onOpenScanner}
+                    className="group flex items-center justify-center space-x-2 px-4 py-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/40 hover:border-emerald-400 text-emerald-200 hover:text-white hover:bg-slate-800 font-bold text-sm shadow-md transition-all hover:scale-[1.02]"
+                  >
+                    <Scan className="w-4 h-4 text-emerald-400 animate-pulse" />
+                    <span>Quick Scan</span>
+                  </button>
 
-              {/* ENTERPRISE SUITE BUTTON */}
-              <button
-                onClick={() => onOpenModal('enterprise')}
-                className="group flex items-center justify-center space-x-2.5 px-4 py-3.5 rounded-xl bg-gradient-to-r from-blue-700 via-indigo-700 to-cyan-700 hover:from-blue-600 hover:to-indigo-600 text-white font-bold text-sm shadow-xl shadow-blue-600/30 ring-1 ring-blue-400/50 transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <Tractor className="w-4 h-4 text-cyan-200 group-hover:rotate-6 transition-transform" />
-                <span>Enterprise Suite</span>
-                <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded uppercase font-black tracking-wider">
-                  Demo
-                </span>
-              </button>
+                  <button
+                    onClick={onOpenPassport}
+                    className="group flex items-center justify-center space-x-1.5 px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-slate-500 text-slate-200 hover:bg-slate-800 font-semibold text-sm backdrop-blur-md transition-all hover:scale-[1.02]"
+                  >
+                    <Award className="w-4 h-4 text-amber-400" />
+                    <span>Soil Passport</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  {/* Primary CTA: Sign In to Dashboard */}
+                  <button
+                    onClick={() => onOpenAuth ? onOpenAuth('login') : onLaunchConsole?.()}
+                    className="group flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold text-sm shadow-xl shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <LogIn className="w-4 h-4 text-slate-950" />
+                    <span>Sign In to Dashboard</span>
+                    <ArrowRight className="w-4 h-4 text-slate-950/80 group-hover:translate-x-1 transition-transform" />
+                  </button>
 
-              {/* Soil Passport CTA */}
-              <button
-                onClick={onOpenPassport}
-                className="group flex items-center justify-center space-x-1.5 px-3.5 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-slate-500 text-slate-200 hover:bg-slate-800 font-semibold text-sm backdrop-blur-md transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <Award className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
-                <span>Passport</span>
-              </button>
+                  {/* Secondary CTA: Create Account / Sign Up */}
+                  <button
+                    onClick={() => onOpenAuth ? onOpenAuth('signup') : onOpenModal('local')}
+                    className="group flex items-center justify-center space-x-2 px-5 py-3.5 rounded-xl bg-[#092213] border border-emerald-500/50 hover:border-emerald-400 text-emerald-200 hover:text-white hover:bg-[#0f341e] font-bold text-sm shadow-lg transition-all hover:scale-[1.02]"
+                  >
+                    <UserPlus className="w-4 h-4 text-emerald-400" />
+                    <span>Sign Up Free</span>
+                  </button>
+
+                  {/* 1-Click Demo */}
+                  {onQuickDemoLogin && (
+                    <button
+                      onClick={onQuickDemoLogin}
+                      className="group flex items-center justify-center space-x-2 px-4 py-3.5 rounded-xl bg-gradient-to-r from-amber-600/20 to-emerald-600/20 border border-amber-500/40 hover:border-amber-400 text-amber-200 hover:text-white font-bold text-xs shadow-md transition-all hover:scale-[1.02]"
+                      title="Instantly sign in with a demo account to test the dashboard"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                      <span>1-Click Demo</span>
+                    </button>
+                  )}
+
+                  {/* Live Scanner CTA */}
+                  <button
+                    onClick={onOpenScanner}
+                    className="group flex items-center justify-center space-x-1.5 px-3.5 py-3.5 rounded-xl bg-slate-900/80 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-semibold text-xs backdrop-blur-md transition-all hover:scale-[1.02]"
+                    title="Registration required to access proximal scanning"
+                  >
+                    <Scan className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Quick Scan</span>
+                    <Lock className="w-3 h-3 text-amber-300 ml-0.5" />
+                  </button>
+                </>
+              )}
             </motion.div>
 
             {/* Trust Signals Row */}
